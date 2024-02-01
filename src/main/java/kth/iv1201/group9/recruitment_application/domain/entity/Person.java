@@ -149,8 +149,8 @@ public class Person implements PersonDTO {
     @Override
     public List<AvailabilityDTO> getAvailabilityList() {
         List<AvailabilityDTO> availabilityDTOList = new ArrayList<>();
-        for (AvailabilityDTO competenceProfile : availabilityList) {
-            availabilityDTOList.add(competenceProfile);
+        for (AvailabilityDTO availability : availabilityList) {
+            availabilityDTOList.add(availability);
         }
         return availabilityDTOList;
     }
