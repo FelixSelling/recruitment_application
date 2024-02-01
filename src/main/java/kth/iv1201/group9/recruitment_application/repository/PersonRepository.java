@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import kth.iv1201.group9.recruitment_application.domain.entity.Person;
 
 @Repository
-public interface PersonRepository extends JpaRepository<Person, Integer>{
-    
+public interface PersonRepository extends JpaRepository<Person, Integer> {
+
 }

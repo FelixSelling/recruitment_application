@@ -1,6 +1,6 @@
 package kth.iv1201.group9.recruitment_application.domain.entity;
 
-import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import jakarta.persistence.Basic;
 import jakarta.persistence.Column;
@@ -10,10 +10,12 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import kth.iv1201.group9.recruitment_application.domain.DTO.CompetenceDTO;
+import kth.iv1201.group9.recruitment_application.domain.DTO.CompetenceProfileDTO;
 
 @Entity
 @Table(name = "competence")
-public class Competence implements Serializable {
+public class Competence implements CompetenceDTO {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,6 +36,7 @@ public class Competence implements Serializable {
         this.competenceId = competenceId;
     }
 
+    @Override
     public Integer getCompetenceId() {
         return competenceId;
     }
@@ -42,6 +45,7 @@ public class Competence implements Serializable {
         this.competenceId = competenceId;
     }
 
+    @Override
     public String getName() {
         return name;
     }
@@ -50,8 +54,13 @@ public class Competence implements Serializable {
         this.name = name;
     }
 
-    public List<CompetenceProfile> getCompetenceProfileList() {
-        return competenceProfileList;
+    @Override
+    public List<CompetenceProfileDTO> getCompetenceProfileList() {
+        List<CompetenceProfileDTO> competenceProfileDTOList = new ArrayList<>();
+        for (CompetenceProfileDTO competenceProfile : competenceProfileList) {
+            competenceProfileDTOList.add(competenceProfile);
+        }
+        return competenceProfileDTOList;
     }
 
     public void setCompetenceProfileList(List<CompetenceProfile> competenceProfileList) {

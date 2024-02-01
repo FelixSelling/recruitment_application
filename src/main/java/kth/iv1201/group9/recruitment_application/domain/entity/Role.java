@@ -1,6 +1,6 @@
 package kth.iv1201.group9.recruitment_application.domain.entity;
 
-import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import jakarta.persistence.Basic;
 import jakarta.persistence.Column;
@@ -10,10 +10,12 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import kth.iv1201.group9.recruitment_application.domain.DTO.PersonDTO;
+import kth.iv1201.group9.recruitment_application.domain.DTO.RoleDTO;
 
 @Entity
 @Table(name = "role")
-public class Role implements Serializable {
+public class Role implements RoleDTO {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,6 +36,7 @@ public class Role implements Serializable {
         this.roleId = roleId;
     }
 
+    @Override
     public Integer getRoleId() {
         return roleId;
     }
@@ -42,6 +45,7 @@ public class Role implements Serializable {
         this.roleId = roleId;
     }
 
+    @Override
     public String getName() {
         return name;
     }
@@ -50,8 +54,13 @@ public class Role implements Serializable {
         this.name = name;
     }
 
-    public List<Person> getPersonList() {
-        return personList;
+    @Override
+    public List<PersonDTO> getPersonList() {
+        List<PersonDTO> personDTOList = new ArrayList<>();
+        for (PersonDTO person : personList) {
+            personDTOList.add(person);
+        }
+        return personDTOList;
     }
 
     public void setPersonList(List<Person> personList) {

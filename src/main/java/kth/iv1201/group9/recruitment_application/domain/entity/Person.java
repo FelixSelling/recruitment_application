@@ -1,6 +1,6 @@
 package kth.iv1201.group9.recruitment_application.domain.entity;
 
-import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import jakarta.persistence.Basic;
 import jakarta.persistence.Column;
@@ -12,10 +12,13 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import kth.iv1201.group9.recruitment_application.domain.DTO.AvailabilityDTO;
+import kth.iv1201.group9.recruitment_application.domain.DTO.CompetenceProfileDTO;
+import kth.iv1201.group9.recruitment_application.domain.DTO.PersonDTO;
 
 @Entity
 @Table(name = "person")
-public class Person implements Serializable {
+public class Person implements PersonDTO {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -58,6 +61,7 @@ public class Person implements Serializable {
         this.personId = personId;
     }
 
+    @Override
     public Integer getPersonId() {
         return personId;
     }
@@ -66,6 +70,7 @@ public class Person implements Serializable {
         this.personId = personId;
     }
 
+    @Override
     public String getName() {
         return name;
     }
@@ -74,6 +79,7 @@ public class Person implements Serializable {
         this.name = name;
     }
 
+    @Override
     public String getSurname() {
         return surname;
     }
@@ -82,6 +88,7 @@ public class Person implements Serializable {
         this.surname = surname;
     }
 
+    @Override
     public String getPnr() {
         return pnr;
     }
@@ -90,6 +97,7 @@ public class Person implements Serializable {
         this.pnr = pnr;
     }
 
+    @Override
     public String getEmail() {
         return email;
     }
@@ -98,6 +106,7 @@ public class Person implements Serializable {
         this.email = email;
     }
 
+    @Override
     public String getPassword() {
         return password;
     }
@@ -106,6 +115,7 @@ public class Person implements Serializable {
         this.password = password;
     }
 
+    @Override
     public String getUsername() {
         return username;
     }
@@ -114,6 +124,7 @@ public class Person implements Serializable {
         this.username = username;
     }
 
+    @Override
     public Role getRole() {
         return role;
     }
@@ -122,16 +133,26 @@ public class Person implements Serializable {
         this.role = role;
     }
 
-    public List<CompetenceProfile> getCompetenceProfileList() {
-        return competenceProfileList;
+    @Override
+    public List<CompetenceProfileDTO> getCompetenceProfileList() {
+        List<CompetenceProfileDTO> competenceProfileDTOList = new ArrayList<>();
+        for (CompetenceProfileDTO competenceProfile : competenceProfileList) {
+            competenceProfileDTOList.add(competenceProfile);
+        }
+        return competenceProfileDTOList;
     }
 
     public void setCompetenceProfileList(List<CompetenceProfile> competenceProfileList) {
         this.competenceProfileList = competenceProfileList;
     }
 
-    public List<Availability> getAvailabilityList() {
-        return availabilityList;
+    @Override
+    public List<AvailabilityDTO> getAvailabilityList() {
+        List<AvailabilityDTO> availabilityDTOList = new ArrayList<>();
+        for (AvailabilityDTO competenceProfile : availabilityList) {
+            availabilityDTOList.add(competenceProfile);
+        }
+        return availabilityDTOList;
     }
 
     public void setAvailabilityList(List<Availability> availabilityList) {

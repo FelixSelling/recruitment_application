@@ -28,13 +28,15 @@
             <th>Username</th>
         </tr>
         <tr th:each="person : ${personList}">
-            <td th:text="${person.personId}"></td>
+            <td th:text="${avail}"></td>
             <td th:text="${person.name}"></td>
             <td th:text="${person.surname}"></td>
             <td th:text="${person.pnr}"></td>
             <td th:text="${person.email}"></td>
             <td th:text="${person.password}"></td>
             <td th:text="${person.username}"></td>
+ 
+
         </tr>
     </table>
 </body>
