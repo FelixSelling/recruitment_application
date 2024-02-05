@@ -19,11 +19,12 @@ public class PersonDTO {
         this.email = person.getEmail();
         this.password = person.getPassword();
         this.username = person.getUsername();
-        
-        // TODO create DTOs for each entity and add to PersonDTO, below adds entity directly
-        //this.role = person.getRole();
-        //this.competenceProfileList = person.getCompetenceProfileList();
-        //this.AvailabilityList = person.getAvailabilityList();
+
+        // TODO create DTOs for each entity and add to PersonDTO, below adds entity
+        // directly
+        // this.role = person.getRole();
+        // this.competenceProfileList = person.getCompetenceProfileList();
+        // this.AvailabilityList = person.getAvailabilityList();
     }
 
     public long getPersonId() {
