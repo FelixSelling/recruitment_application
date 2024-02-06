@@ -18,9 +18,7 @@ public class LoginController {
     LoginService loginService;
 
     @GetMapping("/login")
-    public String showLoginView(Model model) {
-        model.addAttribute("username", "THISISUSERNAME");
-        model.addAttribute("password", "THISISPASSWORD");
+    public String showLoginView() {
         return "loginView";
     }
 

@@ -16,23 +16,12 @@
       text-align: center;
     }
   </style>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/js-sha256/0.9.0/sha256.min.js"></script> <!-- Include the sha256 library -->
-  <script>
-    function hashPassword(event) {
-      event.preventDefault(); // Prevent form submission
-      var passwordInput = document.getElementById("password");
-      var salt = "thisissomesalt1234"; // TODO Replace with another salt
-      var hashedPassword = sha256(passwordInput.value + salt);
-      passwordInput.value = hashedPassword;
-      event.target.submit(); // Submit the form with hashed password
-    }
-  </script>
 </head>
 
 <body>
   <h1>Login page</h1>
   <p>Please enter credentials</p>
-  <form action="/login" method="post" onsubmit="hashPassword(event)">
+  <form action="/login" method="post">
     <table>
       <tr>
         <td><label for="username">Username</label></td>
@@ -50,8 +39,14 @@
       </tr>
     </table>
   </form>
-  <p th:text="'Username: ' + ${username}"></p>
-  <p th:text="'Password: ' + ${password}"></p>
+  <table>
+    <tr>
+      <td th:text="${username}"></td>
+    </tr>
+    <tr>
+      <td th:text="${password}"></td>
+    </tr>
+  </table>
 </body>
 
 </html>
