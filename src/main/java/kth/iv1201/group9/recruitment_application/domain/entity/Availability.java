@@ -1,6 +1,5 @@
 package kth.iv1201.group9.recruitment_application.domain.entity;
 
-import java.io.Serializable;
 import java.util.Date;
 import jakarta.persistence.Basic;
 import jakarta.persistence.Column;
@@ -13,10 +12,11 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
+import kth.iv1201.group9.recruitment_application.domain.DTO.AvailabilityDTO;
 
 @Entity
 @Table(name = "availability")
-public class Availability implements Serializable {
+public class Availability implements AvailabilityDTO {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -43,6 +43,7 @@ public class Availability implements Serializable {
         this.availabilityId = availabilityId;
     }
 
+    @Override
     public Integer getAvailabilityId() {
         return availabilityId;
     }
@@ -51,6 +52,7 @@ public class Availability implements Serializable {
         this.availabilityId = availabilityId;
     }
 
+    @Override
     public Date getFromDate() {
         return fromDate;
     }
@@ -59,6 +61,7 @@ public class Availability implements Serializable {
         this.fromDate = fromDate;
     }
 
+    @Override
     public Date getToDate() {
         return toDate;
     }
@@ -67,6 +70,7 @@ public class Availability implements Serializable {
         this.toDate = toDate;
     }
 
+    @Override
     public Person getPerson() {
         return person;
     }

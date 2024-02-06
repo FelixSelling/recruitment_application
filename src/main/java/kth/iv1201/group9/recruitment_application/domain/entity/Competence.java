@@ -1,7 +1,7 @@
 package kth.iv1201.group9.recruitment_application.domain.entity;
 
-import java.io.Serializable;
-import java.util.List;
+import java.util.Set;
+
 import jakarta.persistence.Basic;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -10,10 +10,12 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import kth.iv1201.group9.recruitment_application.domain.DTO.CompetenceDTO;
+import kth.iv1201.group9.recruitment_application.domain.DTO.CompetenceProfileDTO;
 
 @Entity
 @Table(name = "competence")
-public class Competence implements Serializable {
+public class Competence implements CompetenceDTO {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,7 +27,7 @@ public class Competence implements Serializable {
     private String name;
 
     @OneToMany(mappedBy = "competence")
-    private List<CompetenceProfile> competenceProfileList;
+    private Set<CompetenceProfile> competenceProfileList;
 
     public Competence() {
     }
@@ -34,6 +36,7 @@ public class Competence implements Serializable {
         this.competenceId = competenceId;
     }
 
+    @Override
     public Integer getCompetenceId() {
         return competenceId;
     }
@@ -42,6 +45,7 @@ public class Competence implements Serializable {
         this.competenceId = competenceId;
     }
 
+    @Override
     public String getName() {
         return name;
     }
@@ -50,11 +54,12 @@ public class Competence implements Serializable {
         this.name = name;
     }
 
-    public List<CompetenceProfile> getCompetenceProfileList() {
+    @Override
+    public Set<? extends CompetenceProfileDTO> getCompetenceProfileList() {
         return competenceProfileList;
     }
 
-    public void setCompetenceProfileList(List<CompetenceProfile> competenceProfileList) {
+    public void setCompetenceProfileList(Set<CompetenceProfile> competenceProfileList) {
         this.competenceProfileList = competenceProfileList;
     }
 }

@@ -1,57 +1,27 @@
 package kth.iv1201.group9.recruitment_application.domain.DTO;
 
-import kth.iv1201.group9.recruitment_application.domain.entity.Person;
+import java.util.Set;
 
-public class PersonDTO {
-    private final long personId;
-    private final String name;
-    private final String surname;
-    private final String pnr;
-    private final String email;
-    private final String password;
-    private final String username;
+public interface PersonDTO {
 
-    public PersonDTO(Person person) {
-        this.personId = person.getPersonId();
-        this.name = person.getName();
-        this.surname = person.getSurname();
-        this.pnr = person.getPnr();
-        this.email = person.getEmail();
-        this.password = person.getPassword();
-        this.username = person.getUsername();
+    Integer getPersonId();
 
-        // TODO create DTOs for each entity and add to PersonDTO, below adds entity
-        // directly
-        // this.role = person.getRole();
-        // this.competenceProfileList = person.getCompetenceProfileList();
-        // this.AvailabilityList = person.getAvailabilityList();
-    }
+    String getName();
 
-    public long getPersonId() {
-        return personId;
-    }
+    String getSurname();
 
-    public String getName() {
-        return name;
-    }
+    String getPnr();
 
-    public String getSurname() {
-        return surname;
-    }
+    String getEmail();
 
-    public String getPnr() {
-        return pnr;
-    }
+    String getPassword();
 
-    public String getEmail() {
-        return email;
-    }
+    String getUsername();
 
-    public String getPassword() {
-        return password;
-    }
+    RoleDTO getRole();
 
-    public String getUsername() {
-        return username;
-    }
+    Set<? extends CompetenceProfileDTO> getCompetenceProfileList();
+
+    Set<? extends AvailabilityDTO> getAvailabilityList();
+
 }
