@@ -1,6 +1,5 @@
 package kth.iv1201.group9.recruitment_application.domain.entity;
 
-import java.io.Serializable;
 import java.math.BigDecimal;
 import jakarta.persistence.Basic;
 import jakarta.persistence.Column;
@@ -11,10 +10,11 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import kth.iv1201.group9.recruitment_application.domain.DTO.CompetenceProfileDTO;
 
 @Entity
 @Table(name = "competence_profile")
-public class CompetenceProfile implements Serializable {
+public class CompetenceProfile implements CompetenceProfileDTO {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,7 +22,7 @@ public class CompetenceProfile implements Serializable {
     @Column(name = "competence_profile_id")
     private Integer competenceProfileId;
 
-    // @Max(value=?)  @Min(value=?)
+    // @Max(value=?) @Min(value=?)
     @Column(name = "years_of_experience")
     private BigDecimal yearsOfExperience;
 
@@ -41,6 +41,7 @@ public class CompetenceProfile implements Serializable {
         this.competenceProfileId = competenceProfileId;
     }
 
+    @Override
     public Integer getCompetenceProfileId() {
         return competenceProfileId;
     }
@@ -49,6 +50,7 @@ public class CompetenceProfile implements Serializable {
         this.competenceProfileId = competenceProfileId;
     }
 
+    @Override
     public BigDecimal getYearsOfExperience() {
         return yearsOfExperience;
     }
@@ -57,6 +59,7 @@ public class CompetenceProfile implements Serializable {
         this.yearsOfExperience = yearsOfExperience;
     }
 
+    @Override
     public Competence getCompetence() {
         return competence;
     }
@@ -65,6 +68,7 @@ public class CompetenceProfile implements Serializable {
         this.competence = competence;
     }
 
+    @Override
     public Person getPerson() {
         return person;
     }
