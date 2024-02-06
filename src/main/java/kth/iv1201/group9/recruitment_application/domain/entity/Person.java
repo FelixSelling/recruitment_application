@@ -1,7 +1,7 @@
 package kth.iv1201.group9.recruitment_application.domain.entity;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Set;
+
 import jakarta.persistence.Basic;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -49,10 +49,10 @@ public class Person implements PersonDTO {
     private Role role;
 
     @OneToMany(mappedBy = "person")
-    private List<CompetenceProfile> competenceProfileList;
+    private Set<CompetenceProfile> competenceProfileList;
 
     @OneToMany(mappedBy = "person")
-    private List<Availability> availabilityList;
+    private Set<Availability> availabilityList;
 
     public Person() {
     }
@@ -134,28 +134,20 @@ public class Person implements PersonDTO {
     }
 
     @Override
-    public List<CompetenceProfileDTO> getCompetenceProfileList() {
-        List<CompetenceProfileDTO> competenceProfileDTOList = new ArrayList<>();
-        for (CompetenceProfileDTO competenceProfile : competenceProfileList) {
-            competenceProfileDTOList.add(competenceProfile);
-        }
-        return competenceProfileDTOList;
+    public Set<? extends CompetenceProfileDTO> getCompetenceProfileList() {
+        return competenceProfileList;
     }
 
-    public void setCompetenceProfileList(List<CompetenceProfile> competenceProfileList) {
+    public void setCompetenceProfileList(Set<CompetenceProfile> competenceProfileList) {
         this.competenceProfileList = competenceProfileList;
     }
 
     @Override
-    public List<AvailabilityDTO> getAvailabilityList() {
-        List<AvailabilityDTO> availabilityDTOList = new ArrayList<>();
-        for (AvailabilityDTO availability : availabilityList) {
-            availabilityDTOList.add(availability);
-        }
-        return availabilityDTOList;
+    public Set<? extends AvailabilityDTO> getAvailabilityList() {
+        return availabilityList;
     }
 
-    public void setAvailabilityList(List<Availability> availabilityList) {
+    public void setAvailabilityList(Set<Availability> availabilityList) {
         this.availabilityList = availabilityList;
     }
 }

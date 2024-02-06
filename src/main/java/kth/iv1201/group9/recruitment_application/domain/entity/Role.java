@@ -1,7 +1,6 @@
 package kth.iv1201.group9.recruitment_application.domain.entity;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Set;
 import jakarta.persistence.Basic;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -27,7 +26,7 @@ public class Role implements RoleDTO {
     private String name;
 
     @OneToMany(mappedBy = "role")
-    private List<Person> personList;
+    private Set<Person> personList;
 
     public Role() {
     }
@@ -55,15 +54,11 @@ public class Role implements RoleDTO {
     }
 
     @Override
-    public List<PersonDTO> getPersonList() {
-        List<PersonDTO> personDTOList = new ArrayList<>();
-        for (PersonDTO person : personList) {
-            personDTOList.add(person);
-        }
-        return personDTOList;
+    public Set<? extends PersonDTO> getPersonList() {
+        return personList;
     }
 
-    public void setPersonList(List<Person> personList) {
+    public void setPersonList(Set<Person> personList) {
         this.personList = personList;
     }
 }
