@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Recruitment App</title>
+  <style>
+    /* Styling for the body */
+    body {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    /* Styling for the form */
+    form {
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Login page</h1>
+  <p>Please enter credentials</p>
+  <form action="/login" method="post">
+    <table>
+      <tr>
+        <td><label for="username">Username</label></td>
+        <td><input type="text" id="username" name="username" required></td>
+      </tr>
+      <tr>
+        <td><label for="password">Password</label></td>
+        <td><input type="password" id="password" name="password" required></td>
+      </tr>
+      <tr>
+        <td colspan="2"><input type="submit" value="Submit"></td>
+      </tr>
+      <tr>
+        <td colspan="2" style="color: red;" th:text="${loginError}"></td>
+      </tr>
+    </table>
+  </form>
+</body>
+
+</html>
