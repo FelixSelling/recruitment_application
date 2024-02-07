@@ -8,17 +8,17 @@ import java.util.List;
 public interface RoleDTO {
 
   /**
-   * Retrieves the role ID.
+   * Returns the role ID.
    */
   Integer getRoleId();
 
   /**
-   * Retrieves the name of the role.
+   * Returns the name of the role.
    */
   String getName();
 
   /**
-   * Retrieves a list of persons associated with the role.
+   * Returns a list of persons associated with the role.
    */
   List<? extends PersonDTO> getPersonList();
 }
