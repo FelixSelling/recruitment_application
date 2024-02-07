@@ -1,6 +1,6 @@
 package kth.iv1201.group9.recruitment_application.domain.entity;
 
-import java.util.Set;
+import java.util.List;
 
 import jakarta.persistence.Basic;
 import jakarta.persistence.Column;
@@ -49,10 +49,10 @@ public class Person implements PersonDTO {
     private Role role;
 
     @OneToMany(mappedBy = "person")
-    private Set<CompetenceProfile> competenceProfileList;
+    private List<CompetenceProfile> competenceProfileList;
 
     @OneToMany(mappedBy = "person")
-    private Set<Availability> availabilityList;
+    private List<Availability> availabilityList;
 
     public Person() {
     }
@@ -134,20 +134,20 @@ public class Person implements PersonDTO {
     }
 
     @Override
-    public Set<? extends CompetenceProfileDTO> getCompetenceProfileList() {
+    public List<? extends CompetenceProfileDTO> getCompetenceProfileList() {
         return competenceProfileList;
     }
 
-    public void setCompetenceProfileList(Set<CompetenceProfile> competenceProfileList) {
+    public void setCompetenceProfileList(List<CompetenceProfile> competenceProfileList) {
         this.competenceProfileList = competenceProfileList;
     }
 
     @Override
-    public Set<? extends AvailabilityDTO> getAvailabilityList() {
+    public List<? extends AvailabilityDTO> getAvailabilityList() {
         return availabilityList;
     }
 
-    public void setAvailabilityList(Set<Availability> availabilityList) {
+    public void setAvailabilityList(List<Availability> availabilityList) {
         this.availabilityList = availabilityList;
     }
 }

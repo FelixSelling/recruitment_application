@@ -1,11 +1,11 @@
 package kth.iv1201.group9.recruitment_application.domain.DTO;
 
-import java.util.Set;
+import java.util.List;
 
 public interface RoleDTO {
   Integer getRoleId();
 
   String getName();
 
-  Set<? extends PersonDTO> getPersonList();
+  List<? extends PersonDTO> getPersonList();
 }

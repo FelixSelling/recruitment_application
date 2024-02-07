@@ -1,6 +1,6 @@
 package kth.iv1201.group9.recruitment_application.domain.entity;
 
-import java.util.Set;
+import java.util.List;
 
 import jakarta.persistence.Basic;
 import jakarta.persistence.Column;
@@ -27,7 +27,7 @@ public class Competence implements CompetenceDTO {
     private String name;
 
     @OneToMany(mappedBy = "competence")
-    private Set<CompetenceProfile> competenceProfileList;
+    private List<CompetenceProfile> competenceProfileList;
 
     public Competence() {
     }
@@ -55,11 +55,11 @@ public class Competence implements CompetenceDTO {
     }
 
     @Override
-    public Set<? extends CompetenceProfileDTO> getCompetenceProfileList() {
+    public List<? extends CompetenceProfileDTO> getCompetenceProfileList() {
         return competenceProfileList;
     }
 
-    public void setCompetenceProfileList(Set<CompetenceProfile> competenceProfileList) {
+    public void setCompetenceProfileList(List<CompetenceProfile> competenceProfileList) {
         this.competenceProfileList = competenceProfileList;
     }
 }

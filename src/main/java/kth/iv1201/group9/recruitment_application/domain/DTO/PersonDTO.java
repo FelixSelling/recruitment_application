@@ -1,6 +1,6 @@
 package kth.iv1201.group9.recruitment_application.domain.DTO;
 
-import java.util.Set;
+import java.util.List;
 
 public interface PersonDTO {
 
@@ -20,8 +20,8 @@ public interface PersonDTO {
 
     RoleDTO getRole();
 
-    Set<? extends CompetenceProfileDTO> getCompetenceProfileList();
+    List<? extends CompetenceProfileDTO> getCompetenceProfileList();
 
-    Set<? extends AvailabilityDTO> getAvailabilityList();
+    List<? extends AvailabilityDTO> getAvailabilityList();
 
 }
