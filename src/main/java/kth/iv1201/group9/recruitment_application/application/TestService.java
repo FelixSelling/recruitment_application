@@ -16,9 +16,7 @@ public class TestService {
 
     public List<PersonDTO> getAllPersonList() {
         List<PersonDTO> personList = new ArrayList<>();
-        for (PersonDTO person : personRepo.findAll()) {
-            personList.add(person);
-        }
+        personList.addAll(personRepo.findAll());
         return personList;
     }
 }
