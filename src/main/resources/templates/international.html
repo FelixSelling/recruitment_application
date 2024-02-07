@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="#{welcome.heading}">Welcome</title>
+</head>
+<body>
+    <h1 th:text="#{welcome.heading}">Welcome</h1>
+    <p th:text="#{welcome.message}">This is a test Thymeleaf template.</p>
+    <p th:text="#{greeting}"></p>
+
+    <p>
+        <a th:href="@{/international?lang=en}">English</a>
+        <a th:href="@{/international?lang=sv}">Swedish</a>
+        
+    </p>
+</body>
+</html>
+
