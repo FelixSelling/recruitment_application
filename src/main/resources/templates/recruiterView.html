@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Recruitment App</title>
+  <style>
+    /* Styling for the body */
+    body {
+      display: flex;
+      flex-direction: column;
+      justify-content: normal;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Recruiter Page</h1>
+  <p>Here is the list of applicants</p>
+  <table>
+    <tr>
+      <th>Name</th>
+      <th>Surname</th>
+      <th>PNR</th>
+      <th>Email</th>
+    </tr>
+    <!-- Loop through the personList and display each person's information -->
+    <tr th:each="person : ${personList}">
+      <td th:text="${person.name}"></td>
+      <td th:text="${person.surname}"></td>
+      <td th:text="${person.pnr}"></td>
+      <td th:text="${person.email}"></td>
+    </tr>
+  </table>
+</body>
+
+</html>
