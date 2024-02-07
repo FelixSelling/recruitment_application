@@ -26,7 +26,6 @@ public class RecruiterController {
      */
     @GetMapping("/recruiter")
     public String showRecruiterView(Model model) {
-        model.addAttribute("personList", RecruiterService.getAllApplicantsList());
         return "recruiterView";
     }
 
