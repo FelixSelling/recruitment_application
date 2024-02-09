@@ -13,7 +13,7 @@ import kth.iv1201.group9.recruitment_application.application.RecruiterService;
 
 @Controller
 @Scope("session")
-public class RecruiterController {
+public class ApplicantController {
     @Autowired
     RecruiterService RecruiterService;
 
@@ -23,9 +23,9 @@ public class RecruiterController {
      * @param model the model used to pass data to the view
      * @return the name of the view to be displayed
      */
-    @GetMapping("/recruiter")
+    @GetMapping("/applicant")
     public String showRecruiterView(Model model) {
-        return "recruiterView";
+        return "applicantView";
     }
 
     // Logout post mapping handled by spring
