@@ -23,8 +23,9 @@ public class WebSecurityConfig {
 		return http.formLogin(form -> form.loginPage("/login").permitAll())
 				.authorizeHttpRequests(auth -> auth
 						.requestMatchers("/login/**").permitAll() // Everyone is allowed
+						.requestMatchers("/registration/**").permitAll() // Everyone is allowed
 						.requestMatchers("/recruiter/**").hasAnyAuthority("recruiter") // Only recruiters
-						.requestMatchers("/applicant/**").hasAnyAuthority("recruiter", "applicant") // Recruiters and applicants
+						.requestMatchers("/applicant/**").hasAnyAuthority("applicant") // Only applicants
 						.anyRequest().authenticated())
 				.userDetailsService(loginService).build();
 	}
@@ -34,3 +35,10 @@ public class WebSecurityConfig {
 		return new BCryptPasswordEncoder(); // Specification for which
 	}
 }
+
+/*
+ * TODO:
+ * Hashing?
+ * username in controller? DONE
+ * Authorization Token timeout?
+ */
