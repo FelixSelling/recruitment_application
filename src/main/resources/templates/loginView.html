@@ -49,16 +49,16 @@
               />
             </td>
           </tr>
-          <!--Show if bad credentials-->
-          <div style="color: red" th:if="${param.error}">
-            Bad credentials, please try again!
-          </div>
-
+        </tr>
           <tr>
             <td colspan="2"><input type="submit" value="Login" /></td>
           </tr>
+          <br>
           <tr>
-            <td colspan="2" style="color: red" th:text="${loginError}"></td>
+            <td></td>
+            <td>
+              <a th:href="@{/registration}" method="get">Create account?</a>
+            </td>
           </tr>
         </table>
       </form>

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <html>
+    <head>
+      <title>Recruitment App</title>
+      <style>
+        /* Styling for the body */
+        body {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          height: 100vh;
+          margin: 0;
+        }
+        /* Styling for the form */
+        form {
+          text-align: center;
+        }
+      </style>
+    </head>
+
+    <body>
+      <h1>Signup page</h1>
+      <p>Please enter details</p>
+      <form th:action="@{/registration}" method="post" modelAttribute="person">
+        <table>
+          <tr>
+            <td></td>
+            <td>
+              <input
+                type="text"
+                id="name"
+                name="name"
+                placeholder="First name"
+                required
+              />
+            </td>
+          </tr>
+          <tr>
+            <td></td>
+            <td>
+              <input
+                type="text"
+                id="surname"
+                name="surname"
+                placeholder="Last name"
+                required
+              />
+            </td>
+          </tr>
+          <tr>
+            <td></td>
+            <td>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                placeholder="Email address"
+                required
+              />
+            </td>
+          </tr>
+          <tr>
+            <td></td>
+            <td>
+              <input
+                type="text"
+                id="pnr"
+                name="pnr"
+                placeholder="Person number"
+                required
+              />
+            </td>
+          </tr>
+          <tr>
+            <td></td>
+            <td>
+              <input
+                type="text"
+                id="username"
+                name="username"
+                placeholder="Username"
+                required
+              />
+            </td>
+          </tr>
+          <tr>
+            <td></td>
+            <td>
+              <input
+                type="password"
+                id="password"
+                name="password"
+                placeholder="Password"
+                required
+              />
+            </td>
+          </tr>
+          <!--Show if bad credentials-->
+          <tr>
+            <td colspan="2"><input type="submit" value="Create account" /></td>
+          </tr>
+
+          <tr>
+            <td></td>
+            <td>
+              <a th:href="@{/login}">Back to login</a>
+            </td>
+          </tr>
+        </table>
+      </form>
+    </body>
+  </html>
+</html>
