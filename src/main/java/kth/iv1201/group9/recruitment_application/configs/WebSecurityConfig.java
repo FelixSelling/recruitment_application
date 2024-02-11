@@ -32,7 +32,7 @@ public class WebSecurityConfig {
 
 	@Bean
 	PasswordEncoder passwordEncoder() {
-		return new BCryptPasswordEncoder(); // Specification for which
+		return new BCryptPasswordEncoder(12); // Specification for which
 	}
 }
 
