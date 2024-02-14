@@ -53,6 +53,9 @@
           <tr>
             <td colspan="2"><input type="submit" value="Login" /></td>
           </tr>
+          <tr>
+            <td colspan="2" style="color: red;" th:if="${param.error}">Invalid username or password</td>
+          </tr>
           <br>
           <tr>
             <td></td>

@@ -38,7 +38,5 @@ public class WebSecurityConfig {
 
 /*
  * TODO:
- * Hashing?
- * username in controller? DONE
  * Authorization Token timeout?
  */
