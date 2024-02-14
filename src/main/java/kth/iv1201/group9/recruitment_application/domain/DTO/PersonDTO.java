@@ -1,56 +1,60 @@
 package kth.iv1201.group9.recruitment_application.domain.DTO;
 
-import kth.iv1201.group9.recruitment_application.domain.entity.Person;
+import java.util.List;
 
-public class PersonDTO {
-    private final long personId;
-    private final String name;
-    private final String surname;
-    private final String pnr;
-    private final String email;
-    private final String password;
-    private final String username;
+/**
+ * The PersonDTO interface represents a data transfer object for a person.
+ */
+public interface PersonDTO {
 
-    public PersonDTO(Person person) {
-        this.personId = person.getPersonId();
-        this.name = person.getName();
-        this.surname = person.getSurname();
-        this.pnr = person.getPnr();
-        this.email = person.getEmail();
-        this.password = person.getPassword();
-        this.username = person.getUsername();
-        
-        // TODO create DTOs for each entity and add to PersonDTO, below adds entity directly
-        //this.role = person.getRole();
-        //this.competenceProfileList = person.getCompetenceProfileList();
-        //this.AvailabilityList = person.getAvailabilityList();
-    }
+    /**
+     * Returns the ID of the person.
+     */
+    Integer getPersonId();
 
-    public long getPersonId() {
-        return personId;
-    }
+    /**
+     * Returns the name of the person.
+     */
+    String getName();
 
-    public String getName() {
-        return name;
-    }
+    /**
+     * Returns the surname of the person.
+     */
+    String getSurname();
 
-    public String getSurname() {
-        return surname;
-    }
+    /**
+     * Returns the personal identification number (pnr) of the person.
+     */
+    String getPnr();
 
-    public String getPnr() {
-        return pnr;
-    }
+    /**
+     * Returns the email of the person.
+     */
+    String getEmail();
 
-    public String getEmail() {
-        return email;
-    }
+    /**
+     * Returns the password of the person.
+     */
+    String getPassword();
 
-    public String getPassword() {
-        return password;
-    }
+    /**
+     * Returns the username of the person.
+     */
+    String getUsername();
 
-    public String getUsername() {
-        return username;
-    }
+    /**
+     * Returns the role of the person.
+     */
+    RoleDTO getRole();
+
+    /**
+     * Returns a list of competence profiles associated with the person.
+     */
+    List<? extends CompetenceProfileDTO> getCompetenceProfileList();
+
+    /**
+     * Returns the list of availabilities associated with this person.
+     */
+    List<? extends AvailabilityDTO> getAvailabilityList();
+
 }

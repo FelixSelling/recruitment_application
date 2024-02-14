@@ -1,42 +1,39 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-
-<head>
+  <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <title> Thymeleaf Spring Boot Demo </title>
-</head>
+    <title>Thymeleaf Spring Boot Demo</title>
+  </head>
 
-<body>
-    <p th:text="'Hello, ' + ${name} + '!'">
+  <body>
+    <p th:text="'Hello, ' + ${name} + '!'"></p>
     <h4>Welcome to Thymeleaf Demo In Spring Boot</h4>
-    <form action="/test" method="post">
-        <label for="name">What is your name?</label>
-        <input type="text" id="name" name="name" required>
-        <input type="password" id="password" name="password" required>
-        <input type="submit" value="Submit">
+    <form th:action="@{/logout}" method="post">
+      <input type="submit" value="Logout" />
     </form>
 
     <h2>Person List</h2>
     <table>
-        <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Surname</th>
-            <th>PNR</th>
-            <th>Email</th>
-            <th>Password</th>
-            <th>Username</th>
-        </tr>
-        <tr th:each="person : ${personList}">
-            <td th:text="${person.personId}"></td>
-            <td th:text="${person.name}"></td>
-            <td th:text="${person.surname}"></td>
-            <td th:text="${person.pnr}"></td>
-            <td th:text="${person.email}"></td>
-            <td th:text="${person.password}"></td>
-            <td th:text="${person.username}"></td>
-        </tr>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Surname</th>
+        <th>PNR</th>
+        <th>Email</th>
+        <th>Password</th>
+        <th>Username</th>
+        <th>Role Name</th>
+      </tr>
+      <tr th:each="person : ${personList}">
+        <td th:text="${person.personId}"></td>
+        <td th:text="${person.name}"></td>
+        <td th:text="${person.surname}"></td>
+        <td th:text="${person.pnr}"></td>
+        <td th:text="${person.email}"></td>
+        <td th:text="${person.password}"></td>
+        <td th:text="${person.username}"></td>
+        <td th:text="${person.role.name}"></td>
+      </tr>
     </table>
-</body>
-
+  </body>
 </html>

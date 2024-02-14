@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Recruitment App</title>
+    <style>
+      /* Styling for the body */
+      body {
+        display: flex;
+        flex-direction: column;
+        justify-content: normal;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h1>Applicant Page</h1>
+
+    <form th:action="@{/logout}" method="post">
+      <input type="submit" value="Logout" />
+    </form>
+
+    <p>Application form</p>
+  </body>
+</html>
