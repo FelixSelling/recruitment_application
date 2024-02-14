@@ -2,6 +2,8 @@ package kth.iv1201.group9.recruitment_application.presentation;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,7 +20,8 @@ public class RecruitmentController {
 
     @GetMapping("/test")
     public String showTestView(Model model) {
-        model.addAttribute("name", "World");
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        model.addAttribute("name", authentication.getName());
         model.addAttribute("personList", testService.getAllPersonList());
         return "testView";
     }

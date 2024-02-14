@@ -1,28 +1,29 @@
 package kth.iv1201.group9.recruitment_application.application;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import kth.iv1201.group9.recruitment_application.domain.DTO.PersonDTO;
+import kth.iv1201.group9.recruitment_application.domain.entity.Person;
 import kth.iv1201.group9.recruitment_application.repository.PersonRepository;
 
 @Service
-public class LoginService {
+public class LoginService implements UserDetailsService {
     @Autowired
     private PersonRepository personRepo;
 
-    /**
-     * Finds a user with the given username and password.
-     * 
-     * @param username the username of the user
-     * @param password the password of the user
-     * @return the PersonDTO object representing the user if found, null otherwise
-     */
-    public PersonDTO findUser(String username, String password) {
-        PersonDTO person = personRepo.findByUsernameAndPassword(username, password);
-        if (person != null) {
-            return person;
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        Person person = personRepo.findByUsername(username);
+        if (person == null) {
+            throw new UsernameNotFoundException("User not found with username: " + username);
         }
-        return null;
+        return org.springframework.security.core.userdetails.User
+                .withUsername(person.getUsername())
+                .password(person.getPassword())
+                .authorities(person.getAuthorities())
+                .build();
     }
 }

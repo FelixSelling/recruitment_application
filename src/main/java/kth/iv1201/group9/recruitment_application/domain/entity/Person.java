@@ -1,6 +1,12 @@
 package kth.iv1201.group9.recruitment_application.domain.entity;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import jakarta.persistence.Basic;
 import jakarta.persistence.Column;
@@ -21,7 +27,7 @@ import kth.iv1201.group9.recruitment_application.domain.DTO.PersonDTO;
  */
 @Entity
 @Table(name = "person")
-public class Person implements PersonDTO {
+public class Person implements PersonDTO, UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -237,7 +243,8 @@ public class Person implements PersonDTO {
     /**
      * Set the list of competence profiles associated with the person.
      * 
-     * @param competenceProfileList The list of competence profiles associated with the person.
+     * @param competenceProfileList The list of competence profiles associated with
+     *                              the person.
      */
     public void setCompetenceProfileList(List<CompetenceProfile> competenceProfileList) {
         this.competenceProfileList = competenceProfileList;
@@ -256,9 +263,42 @@ public class Person implements PersonDTO {
     /**
      * Set the list of availabilities associated with the person.
      * 
-     * @param availabilityList The list of availabilities associated with the person.
+     * @param availabilityList The list of availabilities associated with the
+     *                         person.
      */
     public void setAvailabilityList(List<Availability> availabilityList) {
         this.availabilityList = availabilityList;
+    }
+
+    // Below is the user details implementation
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        List<GrantedAuthority> authorityList = new ArrayList<>();
+        SimpleGrantedAuthority authority = new SimpleGrantedAuthority(role.getName());
+        authorityList.add(authority);
+        return authorityList;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+
     }
 }

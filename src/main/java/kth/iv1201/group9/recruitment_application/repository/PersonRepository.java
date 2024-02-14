@@ -24,4 +24,6 @@ public interface PersonRepository extends JpaRepository<Person, Integer> {
      * @return the person with the given username and password, or null if not found
      */
     Person findByUsernameAndPassword(String username, String password);
+
+    Person findByUsername(String username);
 }
