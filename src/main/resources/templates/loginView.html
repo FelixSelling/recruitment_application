@@ -21,8 +21,14 @@
     </head>
 
     <body>
-      <h1>Login page</h1>
-      <p>Please enter credentials</p>
+
+      <p>
+        <a th:href="@{/login?lang=en}">English</a>
+        <a th:href="@{/login?lang=sv}">Swedish</a>
+        
+    </p>
+      <h1 th:text="#{mainpage.header}"></h1>
+      <p th:text="#{mainpage.subheader}"></p>
       <form th:action="@{/login}" method="post">
         <table>
           <tr>
@@ -32,7 +38,7 @@
                 type="text"
                 id="username"
                 name="username"
-                placeholder="Username"
+                th:placeholder="#{default.username}"
                 required
               />
             </td>
@@ -44,14 +50,14 @@
                 type="password"
                 id="password"
                 name="password"
-                placeholder="Password"
+                th:placeholder="#{default.password}"
                 required
               />
             </td>
           </tr>
         </tr>
           <tr>
-            <td colspan="2"><input type="submit" value="Login" /></td>
+            <td colspan="2"><input type="submit" th:value="#{mainpage.loginbtn}"></td>
           </tr>
           <tr>
             <td colspan="2" style="color: red;" th:if="${param.error}">Invalid username or password</td>
@@ -60,7 +66,7 @@
           <tr>
             <td></td>
             <td>
-              <a th:href="@{/registration}" method="get">Create account?</a>
+              <a th:href="@{/registration}" method="get"th:text="#{mainpage.createaccount}"></a>
             </td>
           </tr>
         </table>

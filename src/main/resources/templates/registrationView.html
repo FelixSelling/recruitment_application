@@ -21,8 +21,15 @@
     </head>
 
     <body>
-      <h1>Signup page</h1>
-      <p>Please enter details</p>
+
+      <p>
+        <a th:href="@{/registration?lang=en}">English</a>
+        <a th:href="@{/registration?lang=sv}">Swedish</a>
+        
+    </p>
+
+      <h1 th:text="#{regpage.header}"></h1>
+      <p th:text="#{mainpage.subheader}"></p>
       <form th:action="@{/registration}" method="post" modelAttribute="person">
         <table>
           <tr>
@@ -32,7 +39,7 @@
                 type="text"
                 id="name"
                 name="name"
-                placeholder="First name"
+                th:placeholder="#{regpage.firstname}"
                 required
               />
             </td>
@@ -44,7 +51,7 @@
                 type="text"
                 id="surname"
                 name="surname"
-                placeholder="Last name"
+                th:placeholder="#{regpage.lastname}"
                 required
               />
             </td>
@@ -56,7 +63,7 @@
                 type="email"
                 id="email"
                 name="email"
-                placeholder="Email address"
+                th:placeholder="#{regpage.email}"
                 required
               />
             </td>
@@ -68,7 +75,7 @@
                 type="text"
                 id="pnr"
                 name="pnr"
-                placeholder="Person number"
+                th:placeholder="#{regpage.pnr}"
                 required
               />
             </td>
@@ -80,7 +87,7 @@
                 type="text"
                 id="username"
                 name="username"
-                placeholder="Username"
+                th:placeholder="#{default.username}"
                 required
               />
             </td>
@@ -92,20 +99,20 @@
                 type="password"
                 id="password"
                 name="password"
-                placeholder="Password"
+                th:placeholder="#{default.password}"
                 required
               />
             </td>
           </tr>
           <!--Show if bad credentials-->
           <tr>
-            <td colspan="2"><input type="submit" value="Create account" /></td>
+            <td colspan="2"><input type="submit" th:value="#{regpage.accountdone}" /></td>
           </tr>
 
           <tr>
             <td></td>
             <td>
-              <a th:href="@{/login}">Back to login</a>
+              <a th:href="@{/login}"th:text="#{regpage.back}"></a>
             </td>
           </tr>
         </table>
