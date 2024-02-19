@@ -7,9 +7,18 @@ import org.springframework.web.bind.annotation.GetMapping;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.http.HttpServletRequest;
 
+/**
+ * This class is a controller that handles custom error pages for different HTTP status codes.
+ */
 @Controller
 public class CustomErrorController implements ErrorController {
 
+    /**
+     * Handles the error page based on the HTTP status code.
+     * 
+     * @param request the HTTP servlet request
+     * @return the view name of the error page
+     */
     @GetMapping("/error")
     public String handleError(HttpServletRequest request) {
         Object status = request.getAttribute(RequestDispatcher.ERROR_STATUS_CODE);
