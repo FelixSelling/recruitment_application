@@ -22,5 +22,13 @@
     </form>
 
     <p>List of applications</p>
+    <table>
+      <tr th:each="applicant : ${applications}">
+        <td
+          th:text="${'Full name: ' + applicant.person.name + ' ' + applicant.person.surname}"
+        ></td>
+        <td th:text="${'| Status: ' + applicant.status.name}"></td>
+      </tr>
+    </table>
   </body>
 </html>
