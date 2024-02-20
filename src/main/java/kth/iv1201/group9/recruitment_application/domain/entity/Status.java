@@ -9,6 +9,9 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import kth.iv1201.group9.recruitment_application.domain.DTO.StatusDTO;
 
+/**
+ * The Status class represents the status of an persons application.
+ */
 @Entity
 @Table(name = "status")
 public class Status implements StatusDTO {
@@ -19,32 +22,60 @@ public class Status implements StatusDTO {
     @Column(name = "status_id")
     private Integer statusId;
 
-    @Column(name = "name")
-    private String name;
+    @Column(name = "status_number")
+    private Integer statusNumber;
 
+    /**
+     * Default constructor for the Status class.
+     */
     public Status() {
     }
 
+    /**
+     * Constructor for the Status class with a specified status ID.
+     *
+     * @param statusId the status ID
+     */
     public Status(Integer statusId) {
         this.statusId = statusId;
     }
 
+    /**
+     * Get the status ID.
+     *
+     * @return the status ID
+     */
     @Override
     public Integer getStatusId() {
         return statusId;
     }
 
+    /**
+     * Set the status ID.
+     *
+     * @param statusId the status ID to set
+     */
     public void setStatusId(Integer statusId) {
         this.statusId = statusId;
     }
 
+    /**
+     * Get the status number.
+     *
+     * @return the status number
+     */
     @Override
-    public String getName() {
-        return name;
+    public Integer getStatusNumber() {
+        return statusNumber;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    /**
+     * Set the status number.
+     *
+     * @param status the statusNumber to set
+     */
+    public void setStatusNumber(Integer statusNumber) {
+        this.statusNumber = statusNumber;
     }
 
 }
