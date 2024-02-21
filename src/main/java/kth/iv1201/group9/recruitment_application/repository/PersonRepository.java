@@ -26,4 +26,6 @@ public interface PersonRepository extends JpaRepository<Person, Integer> {
     Person findByUsernameAndPassword(String username, String password);
 
     Person findByUsername(String username);
+
+    Person findByPnr(String pnr);
 }
