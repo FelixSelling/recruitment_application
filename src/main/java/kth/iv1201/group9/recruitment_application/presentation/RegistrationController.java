@@ -31,7 +31,12 @@ public class RegistrationController {
 
     @PostMapping("/registration")
     public String handleSignup(PersonDTO user) {
-        registrationService.handleRegisteredUser(user);
-        return "redirect:/login";
+        try {
+            registrationService.handleRegisteredUser(user);
+            return "redirect:/login?registered";
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "registrationView";
+        }
     }
 }
