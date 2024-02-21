@@ -9,11 +9,22 @@ import org.springframework.stereotype.Service;
 import kth.iv1201.group9.recruitment_application.domain.entity.Person;
 import kth.iv1201.group9.recruitment_application.repository.PersonRepository;
 
+/**
+ * This class is responsible for authenticating users during the login process.
+ * It implements the UserDetailsService interface provided by Spring Security.
+ */
 @Service
 public class LoginService implements UserDetailsService {
     @Autowired
     private PersonRepository personRepo;
 
+    /**
+     * Loads the user details by username.
+     * 
+     * @param username the username of the user to load
+     * @return the UserDetails object representing the user
+     * @throws UsernameNotFoundException if the user is not found
+     */
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Person person = personRepo.findByUsername(username);
