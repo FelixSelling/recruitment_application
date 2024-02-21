@@ -5,6 +5,8 @@ package kth.iv1201.group9.recruitment_application.presentation;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,7 +17,7 @@ import kth.iv1201.group9.recruitment_application.application.RecruiterService;
 @Scope("session")
 public class RecruiterController {
     @Autowired
-    RecruiterService RecruiterService;
+    RecruiterService recruiterService;
 
     /**
      * Retrieves the list of all applicants and displays the recruiter view.
@@ -25,6 +27,9 @@ public class RecruiterController {
      */
     @GetMapping("/recruiter")
     public String showRecruiterView(Model model) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        model.addAttribute("name", authentication.getName());
+        model.addAttribute("applications", recruiterService.getApplicantionsList());
         return "recruiterView";
     }
 

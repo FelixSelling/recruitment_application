@@ -21,12 +21,10 @@
     </head>
 
     <body>
-
       <p>
-        <a th:href="@{/registration?lang=en}">English</a>
-        <a th:href="@{/registration?lang=sv}">Swedish</a>
-        
-    </p>
+        <a th:href="@{/registration?lang=en}" th:text="#{lang.en}"></a>
+        <a th:href="@{/registration?lang=sv}" th:text="#{lang.sv}"></a>
+      </p>
 
       <h1 th:text="#{regpage.header}"></h1>
       <p th:text="#{mainpage.subheader}"></p>
@@ -106,13 +104,15 @@
           </tr>
           <!--Show if bad credentials-->
           <tr>
-            <td colspan="2"><input type="submit" th:value="#{regpage.accountdone}" /></td>
+            <td colspan="2">
+              <input type="submit" th:value="#{regpage.accountdone}" />
+            </td>
           </tr>
 
           <tr>
             <td></td>
             <td>
-              <a th:href="@{/login}"th:text="#{regpage.back}"></a>
+              <a th:href="@{/login}" th:text="#{regpage.back}"></a>
             </td>
           </tr>
         </table>

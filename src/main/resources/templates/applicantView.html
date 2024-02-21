@@ -16,12 +16,17 @@
   </head>
 
   <body>
-    <h1>Applicant Page</h1>
+    <h1 th:text="#{applicantpage.header}"></h1>
 
     <form th:action="@{/logout}" method="post">
-      <input type="submit" value="Logout" />
+      <input type="submit" th:value="#{default.logoutbtn}" />
     </form>
 
-    <p>Application form</p>
+    <p>
+      <a th:href="@{/applicant?lang=en}" th:text="#{lang.en}"></a>
+      <a th:href="@{/applicant?lang=sv}" th:text="#{lang.sv}"></a>
+    </p>
+
+    <p th:text="#{applicantpage.subheader}"></p>
   </body>
 </html>

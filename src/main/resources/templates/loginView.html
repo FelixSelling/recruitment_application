@@ -23,8 +23,8 @@
     <body>
 
       <p>
-        <a th:href="@{/login?lang=en}">English</a>
-        <a th:href="@{/login?lang=sv}">Swedish</a>
+        <a th:href="@{/login?lang=en}" th:text="#{lang.en}"></a>
+        <a th:href="@{/login?lang=sv}" th:text="#{lang.sv}"></a>
         
     </p>
       <h1 th:text="#{mainpage.header}"></h1>
