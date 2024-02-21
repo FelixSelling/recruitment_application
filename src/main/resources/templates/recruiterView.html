@@ -19,12 +19,12 @@
     <h1 th:text="#{recruiterpage.header}"></h1>
 
     <form th:action="@{/logout}" method="post">
-      <input type="submit" value="Logout" />
+      <input type="submit" th:value="#{default.logoutbtn}" />
     </form>
 
     <p>
-      <a th:href="@{/recruiter?lang=en}">English</a>
-      <a th:href="@{/recruiter?lang=sv}">Swedish</a>
+      <a th:href="@{/recruiter?lang=en}" th:text="#{lang.en}"></a>
+      <a th:href="@{/recruiter?lang=sv}" th:text="#{lang.sv}"></a>
     </p>
 
     <p th:text="#{recruiterpage.subheader}"></p>
