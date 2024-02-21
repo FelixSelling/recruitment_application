@@ -16,18 +16,38 @@
   </head>
 
   <body>
-    <h1>Recruiter Page</h1>
+    <h1 th:text="#{recruiterpage.header}"></h1>
+
     <form th:action="@{/logout}" method="post">
       <input type="submit" value="Logout" />
     </form>
 
-    <p>List of applications</p>
+    <p>
+      <a th:href="@{/recruiter?lang=en}">English</a>
+      <a th:href="@{/recruiter?lang=sv}">Swedish</a>
+    </p>
+
+    <p th:text="#{recruiterpage.subheader}"></p>
+
     <table>
       <tr th:each="applicant : ${applications}">
         <td
-          th:text="${'Full name: ' + applicant.person.name + ' ' + applicant.person.surname}"
+          th:text="#{recruiterpage.fullname} + ${': ' + applicant.person.name + ' ' + applicant.person.surname}"
         ></td>
-        <td th:text="${'| Status: ' + applicant.status.statusNumber}"></td>
+        <td th:switch="${applicant.status.statusNumber}">
+          <span
+            th:case="'101'"
+            th:text="'| '+ #{recruiterpage.status} + ': ' + #{status.101}"
+          ></span>
+          <span
+            th:case="'102'"
+            th:text="'| '+ #{recruiterpage.status} + ': ' + #{status.102}"
+          ></span>
+          <span
+            th:case="'103'"
+            th:text="'| '+ #{recruiterpage.status} + ': ' + #{status.103}"
+          ></span>
+        </td>
       </tr>
     </table>
   </body>
