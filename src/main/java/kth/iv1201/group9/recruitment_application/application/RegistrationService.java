@@ -20,6 +20,12 @@ public class RegistrationService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    /**
+     * Handles the registration of a user.
+     * 
+     * @param userDTO the data transfer object containing the user information
+     * @throws IllegalArgumentException if the userDTO is null
+     */
     @SuppressWarnings("null")
     public void handleRegisteredUser(PersonDTO userDTO) {
         if (userDTO == null) {
@@ -28,6 +34,12 @@ public class RegistrationService {
         personRepo.save(validateInput(userDTO));
     }
 
+    /**
+     * Validated the input and returns a new user.
+     * 
+     * @param userDTO the data transfer object containing the user information
+     * @throws IllegalArgumentException if any of the input is invalid
+     */
     private Person validateInput(PersonDTO userDTO) {
         // Validate the input
         String name = validationService.validateName(userDTO.getName());

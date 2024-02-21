@@ -16,7 +16,15 @@ public class ValidationService {
     @Autowired
     private PersonRepository personRepo;
 
-    // NAME
+    /**
+     * Validates a name by checking if it is not empty and contains only regular
+     * characters (a-z and A-Z).
+     *
+     * @param name the name to be validated
+     * @return the validated name
+     * @throws IllegalArgumentException if the name is empty or contains non-regular
+     *                                  characters
+     */
     public String validateName(String name) {
         // Check if the name is not empty
         if (name == null || name.isEmpty()) {
@@ -30,7 +38,15 @@ public class ValidationService {
         return name;
     }
 
-    // SURNAME
+    /**
+     * Validates a surname by checking if it is not empty and contains only regular
+     * characters (a-z and A-Z).
+     *
+     * @param surname the surname to be validated
+     * @return the validated surname
+     * @throws IllegalArgumentException if the surname is empty or contains
+     *                                  non-regular characters
+     */
     public String validateSurname(String surname) {
         // Check if the surname is not empty
         if (surname == null || surname.isEmpty()) {
@@ -44,7 +60,15 @@ public class ValidationService {
         return surname;
     }
 
-    // EMAIL
+    /**
+     * Validates an email by checking if it is not empty and contains a valid email
+     * address.
+     *
+     * @param email the email to be validated
+     * @return the validated email
+     * @throws IllegalArgumentException if the email is empty or not a valid email
+     *                                  address
+     */
     public String validateEmail(String email) {
         // Check if the email is not empty
         if (email == null || email.isEmpty()) {
@@ -60,7 +84,16 @@ public class ValidationService {
         return email;
     }
 
-    // PNR
+    /**
+     * Validates a personal number by checking if it is not empty, contains a valid
+     * date, is a correct personal number and is unique.
+     *
+     * @param pnr the personal number to be validated
+     * @return the validated personal number
+     * @throws IllegalArgumentException if the pnr is empty, not in the correct
+     *                                  format, does not contain a valid date, can
+     *                                  not be validated or is not unique
+     */
     public String validatePnr(String pnr) {
         // Check if the pnr is not empty
         if (pnr == null || pnr.isEmpty()) {
@@ -90,7 +123,16 @@ public class ValidationService {
         return pnr;
     }
 
-    // USERNAME
+    /**
+     * Validates a username by checking if it is not empty, contains only regular
+     * alphanumerical characters and is unique.
+     *
+     * @param username the username to be validated
+     * @return the validated username
+     * @throws IllegalArgumentException if the username is empty, contains
+     *                                  non-regular alphanumerical characters or is
+     *                                  not unique
+     */
     public String validateUsername(String username) {
         // Check if the username is not empty
         if (username == null || username.isEmpty()) {
@@ -108,7 +150,16 @@ public class ValidationService {
         return username;
     }
 
-    // PASSWORD
+    /**
+     * Validates a password by checking if it is not empty and contains at least one
+     * digit, one lowercase letter and one uppercase letter.
+     *
+     * @param password the password to be validated
+     * @return the validated password
+     * @throws IllegalArgumentException if the password is empty or does not contain
+     *                                  at least one digit, one lowercase letter and
+     *                                  one uppercase letter
+     */
     public String validatePassword(String password) {
         // Check if the password is not empty
         if (password == null || password.isEmpty()) {
@@ -125,6 +176,12 @@ public class ValidationService {
         return password;
     }
 
+    /**
+     * Validates a date by checking if it is not null and contains a valid date.
+     * 
+     * @param date the date string to be validated
+     * @return true if the date is valid, false otherwise
+     */
     private boolean validDate(String date) {
         if (date == null || date.length() != 8) {
             return false;
@@ -148,6 +205,13 @@ public class ValidationService {
         }
     }
 
+    /**
+     * Validates a personal number by checking if it is not null, is exactly 13
+     * characters long and is valid according to the Luhn algorithm.
+     * 
+     * @param pnr the personal number to be validated
+     * @return true if the personal number is valid, false otherwise
+     */
     private boolean validPnr(String pnr) {
         // Check if the pnr is exactly 13 characters long (including the hyphen)
         if (pnr == null || pnr.length() != 13) {
@@ -167,14 +231,20 @@ public class ValidationService {
         return isLuhnValid(digits);
     }
 
-    // Luhn algorithm
-    // Returns true if the given digits are valid according to the Luhn algorithm
-    // It processes each digit, doubling every second digit from the right. If the
-    // doubled value is greater than 9, it is reduced by adding the digits
-    // (equivalent to subtracting 9).
-    // The sum of all processed digits is computed, and the number is valid if this
-    // sum is divisible by 10.
+    /**
+     * Checks if the given digits are valid according to the Luhn algorithm.
+     * 
+     * @param digits the digits to be validated
+     * @return true if the digits are valid, false otherwise
+     */
     private boolean isLuhnValid(String digits) {
+        // Luhn algorithm
+        // Returns true if the given digits are valid according to the Luhn algorithm
+        // It processes each digit, doubling every second digit from the right. If the
+        // doubled value is greater than 9, it is reduced by adding the digits
+        // (equivalent to subtracting 9).
+        // The sum of all processed digits is computed, and the number is valid if this
+        // sum is divisible by 10.
         int sum = 0;
         boolean alternate = false;
 
