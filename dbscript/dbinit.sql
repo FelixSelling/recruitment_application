@@ -5,7 +5,7 @@
 -- Dumped from database version 15.1
 -- Dumped by pg_dump version 15.1
 
--- Started on 2024-02-19 22:53:20
+-- Started on 2024-02-21 19:28:52
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -21,6 +21,35 @@ SET row_security = off;
 SET default_tablespace = '';
 
 SET default_table_access_method = heap;
+
+--
+-- TOC entry 225 (class 1259 OID 22851)
+-- Name: application; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.application (
+    application_id integer NOT NULL,
+    person_id integer,
+    status_id integer
+);
+
+
+ALTER TABLE public.application OWNER TO postgres;
+
+--
+-- TOC entry 224 (class 1259 OID 22850)
+-- Name: application_application_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+ALTER TABLE public.application ALTER COLUMN application_id ADD GENERATED ALWAYS AS IDENTITY (
+    SEQUENCE NAME public.application_application_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1
+);
+
 
 --
 -- TOC entry 214 (class 1259 OID 22740)
@@ -173,7 +202,44 @@ ALTER TABLE public.role ALTER COLUMN role_id ADD GENERATED ALWAYS AS IDENTITY (
 
 
 --
--- TOC entry 3194 (class 2606 OID 22763)
+-- TOC entry 227 (class 1259 OID 22857)
+-- Name: status; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.status (
+    status_id integer NOT NULL,
+    status_number integer
+);
+
+
+ALTER TABLE public.status OWNER TO postgres;
+
+--
+-- TOC entry 226 (class 1259 OID 22856)
+-- Name: status_status_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+ALTER TABLE public.status ALTER COLUMN status_id ADD GENERATED ALWAYS AS IDENTITY (
+    SEQUENCE NAME public.status_status_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1
+);
+
+
+--
+-- TOC entry 3214 (class 2606 OID 22855)
+-- Name: application application_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.application
+    ADD CONSTRAINT application_pkey PRIMARY KEY (application_id) INCLUDE (application_id);
+
+
+--
+-- TOC entry 3204 (class 2606 OID 22763)
 -- Name: availability availability_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -182,7 +248,7 @@ ALTER TABLE ONLY public.availability
 
 
 --
--- TOC entry 3196 (class 2606 OID 22765)
+-- TOC entry 3206 (class 2606 OID 22765)
 -- Name: competence competence_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -191,7 +257,7 @@ ALTER TABLE ONLY public.competence
 
 
 --
--- TOC entry 3198 (class 2606 OID 22767)
+-- TOC entry 3208 (class 2606 OID 22767)
 -- Name: competence_profile competence_profile_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -200,7 +266,7 @@ ALTER TABLE ONLY public.competence_profile
 
 
 --
--- TOC entry 3200 (class 2606 OID 22769)
+-- TOC entry 3210 (class 2606 OID 22769)
 -- Name: person person_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -209,7 +275,7 @@ ALTER TABLE ONLY public.person
 
 
 --
--- TOC entry 3202 (class 2606 OID 22771)
+-- TOC entry 3212 (class 2606 OID 22771)
 -- Name: role role_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -218,7 +284,16 @@ ALTER TABLE ONLY public.role
 
 
 --
--- TOC entry 3203 (class 2606 OID 22772)
+-- TOC entry 3216 (class 2606 OID 22861)
+-- Name: status status_id_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.status
+    ADD CONSTRAINT status_id_pkey PRIMARY KEY (status_id);
+
+
+--
+-- TOC entry 3217 (class 2606 OID 22772)
 -- Name: availability availability_person_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -227,7 +302,7 @@ ALTER TABLE ONLY public.availability
 
 
 --
--- TOC entry 3204 (class 2606 OID 22777)
+-- TOC entry 3218 (class 2606 OID 22777)
 -- Name: competence_profile competence_profile_competence_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -236,7 +311,7 @@ ALTER TABLE ONLY public.competence_profile
 
 
 --
--- TOC entry 3205 (class 2606 OID 22782)
+-- TOC entry 3219 (class 2606 OID 22782)
 -- Name: competence_profile competence_profile_person_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -245,7 +320,16 @@ ALTER TABLE ONLY public.competence_profile
 
 
 --
--- TOC entry 3206 (class 2606 OID 22787)
+-- TOC entry 3221 (class 2606 OID 22862)
+-- Name: application person_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.application
+    ADD CONSTRAINT person_id_fkey FOREIGN KEY (person_id) REFERENCES public.person(person_id);
+
+
+--
+-- TOC entry 3220 (class 2606 OID 22787)
 -- Name: person person_role_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -253,7 +337,16 @@ ALTER TABLE ONLY public.person
     ADD CONSTRAINT person_role_id_fkey FOREIGN KEY (role_id) REFERENCES public.role(role_id);
 
 
--- Completed on 2024-02-19 22:53:20
+--
+-- TOC entry 3222 (class 2606 OID 22867)
+-- Name: application status_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.application
+    ADD CONSTRAINT status_id_fkey FOREIGN KEY (status_id) REFERENCES public.status(status_id);
+
+
+-- Completed on 2024-02-21 19:28:52
 
 --
 -- PostgreSQL database dump complete
