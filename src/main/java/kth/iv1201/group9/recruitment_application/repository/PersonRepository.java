@@ -28,4 +28,6 @@ public interface PersonRepository extends JpaRepository<Person, Integer> {
     Person findByUsername(String username);
 
     Person findByPnr(String pnr);
+
+    Person findByEmail(String email);
 }
