@@ -6,12 +6,23 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
+/**
+ * This class represents an email service that is responsible for sending
+ * emails.
+ */
 @Service
 public class EmailService {
 
     @Autowired
     private JavaMailSender mailSender;
 
+    /**
+     * Sends an email asynchronously.
+     *
+     * @param to      the recipient's email address
+     * @param subject the subject of the email
+     * @param body    the body of the email
+     */
     @Async
     public void sendEmail(String to, String subject, String body) {
         SimpleMailMessage message = new SimpleMailMessage();
@@ -21,6 +32,5 @@ public class EmailService {
         message.setText(body);
 
         mailSender.send(message);
-
     }
 }
