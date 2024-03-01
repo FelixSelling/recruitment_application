@@ -8,6 +8,8 @@ import org.springframework.transaction.annotation.Transactional;
 import kth.iv1201.group9.recruitment_application.domain.DTO.PersonDTO;
 import kth.iv1201.group9.recruitment_application.domain.entity.Person;
 import kth.iv1201.group9.recruitment_application.domain.entity.Role;
+import kth.iv1201.group9.recruitment_application.exception.RegistrationException;
+import kth.iv1201.group9.recruitment_application.exception.ValidationException;
 import kth.iv1201.group9.recruitment_application.repository.PersonRepository;
 
 @Transactional
@@ -27,9 +29,10 @@ public class RegistrationService {
      * 
      * @param userDTO the data transfer object containing the user information
      * @throws IllegalArgumentException if the userDTO is null
+     * @throws RegistrationException    if any of the input is invalid
      */
     @SuppressWarnings("null")
-    public void handleRegisteredUser(PersonDTO userDTO) {
+    public void handleRegisteredUser(PersonDTO userDTO) throws RegistrationException {
         if (userDTO == null) {
             throw new IllegalArgumentException("UserDTO is null");
         }
@@ -40,16 +43,28 @@ public class RegistrationService {
      * Validated the input and returns a new user.
      * 
      * @param userDTO the data transfer object containing the user information
-     * @throws IllegalArgumentException if any of the input is invalid
+     * @throws RegistrationException if any of the input is invalid
      */
-    private Person validateInput(PersonDTO userDTO) {
+    private Person validateInput(PersonDTO userDTO) throws RegistrationException {
+        String name;
+        String surname;
+        String email;
+        String pnr;
+        String username;
+        String password;
+
         // Validate the input
-        String name = validationService.validateName(userDTO.getName());
-        String surname = validationService.validateSurname(userDTO.getSurname());
-        String email = validationService.validateEmail(userDTO.getEmail());
-        String pnr = validationService.validatePnr(userDTO.getPnr());
-        String username = validationService.validateUsername(userDTO.getUsername());
-        String password = validationService.validatePassword(userDTO.getPassword());
+        try {
+            name = validationService.validateName(userDTO.getName());
+            surname = validationService.validateSurname(userDTO.getSurname());
+            email = validationService.validateEmail(userDTO.getEmail());
+            pnr = validationService.validatePnr(userDTO.getPnr());
+            username = validationService.validateUsername(userDTO.getUsername());
+            password = validationService.validatePassword(userDTO.getPassword());
+        } catch (ValidationException ex) {
+            ex.printStackTrace();
+            throw new RegistrationException(ex.getMessage());
+        }
 
         // Create a new user and return it for saving
         Person user = new Person();
