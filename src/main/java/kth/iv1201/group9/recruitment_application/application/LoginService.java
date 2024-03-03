@@ -31,7 +31,7 @@ public class LoginService implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Person person = personRepo.findByUsername(username);
         if (person == null) {
-            throw new UsernameNotFoundException("User not found with username: " + username);
+            throw new UsernameNotFoundException("error.login.username.notfound");
         }
         return org.springframework.security.core.userdetails.User
                 .withUsername(person.getUsername())

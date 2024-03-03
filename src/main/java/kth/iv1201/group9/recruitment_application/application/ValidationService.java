@@ -31,12 +31,12 @@ public class ValidationService {
     public String validateName(String name) throws ValidationException {
         // Check if the name is not empty
         if (name == null || name.isEmpty()) {
-            throw new ValidationException("Name is required");
+            throw new ValidationException("error.registration.validation.name.required");
         }
         // Check if the name contains only regular characters
         // a-z and A-Z
         if (!Pattern.matches("[a-zA-Z]+", name)) {
-            throw new ValidationException("Name can only contain regular characters");
+            throw new ValidationException("error.registration.validation.name.invalid");
         }
         return name;
     }
@@ -53,12 +53,12 @@ public class ValidationService {
     public String validateSurname(String surname) throws ValidationException {
         // Check if the surname is not empty
         if (surname == null || surname.isEmpty()) {
-            throw new ValidationException("Surname is required");
+            throw new ValidationException("error.registration.validation.surname.required");
         }
         // Check if the surname contains only regular characters
         // a-z and A-Z
         if (!Pattern.matches("[a-zA-Z]+", surname)) {
-            throw new ValidationException("Surname can only contain regular characters");
+            throw new ValidationException("error.registration.validation.surname.invalid");
         }
         return surname;
     }
@@ -75,18 +75,18 @@ public class ValidationService {
     public String validateEmail(String email) throws ValidationException {
         // Check if the email is not empty
         if (email == null || email.isEmpty()) {
-            throw new ValidationException("Email is required");
+            throw new ValidationException("error.registration.validation.email.required");
         }
         // Check if the email is valid
         // Source: https://howtodoinjava.com/regex/java-regex-validate-email-address/
         if (!Pattern.matches(
                 "^[\\w!#$%&amp;'*+/=?`{|}~^-]+(?:\\.[\\w!#$%&amp;'*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$",
                 email)) {
-            throw new ValidationException("E-mail is not valid");
+            throw new ValidationException("error.registration.validation.email.invalid");
         }
         // Check if the email is unique
         if (personRepo.findByEmail(email) != null) {
-            throw new ValidationException("E-mail address is already registered");
+            throw new ValidationException("error.registration.validation.email.taken");
         }
         return email;
     }
@@ -104,7 +104,7 @@ public class ValidationService {
     public String validatePnr(String pnr) throws ValidationException {
         // Check if the pnr is not empty
         if (pnr == null || pnr.isEmpty()) {
-            throw new ValidationException("Personal number is required");
+            throw new ValidationException("error.registration.validation.pnr.required");
         }
         // If 12 digits, add a hyphen after the 8th digit
         if (Pattern.matches("\\d{12}", pnr)) {
@@ -113,19 +113,19 @@ public class ValidationService {
         // Check if the pnr contains only digits and a hyphen, 8 digits followed by a
         // hyphen and 4 digits
         if (!Pattern.matches("\\d{8}-\\d{4}", pnr)) {
-            throw new ValidationException("Personal number needs to be in the format YYYYMMDD-XXXX");
+            throw new ValidationException("error.registration.validation.pnr.format.invalid");
         }
         // Check if the pnr contains a valid date
         if (!validDate(pnr.substring(0, 8))) {
-            throw new ValidationException("Personal number does not contain a valid date");
+            throw new ValidationException("error.registration.validation.pnr.date.invalid");
         }
         // Check if the pnr is a correct personal number
         if (!validPnr(pnr)) {
-            throw new ValidationException("Personal number can not be validated");
+            throw new ValidationException("error.registration.validation.pnr.invalid");
         }
         // Check if the pnr is unique
         if (personRepo.findByPnr(pnr) != null) {
-            throw new ValidationException("Personal number is already registered");
+            throw new ValidationException("error.registration.validation.pnr.taken");
         }
         return pnr;
     }
@@ -143,16 +143,16 @@ public class ValidationService {
     public String validateUsername(String username) throws ValidationException {
         // Check if the username is not empty
         if (username == null || username.isEmpty()) {
-            throw new ValidationException("Username is required");
+            throw new ValidationException("error.registration.validation.username.required");
         }
         // Check if the username contains only regular alphanumerical characters
         // a-z, A-Z and 0-9
         if (!Pattern.matches("[a-zA-Z0-9]+", username)) {
-            throw new ValidationException("Username can only contain regular alphanumerical characters");
+            throw new ValidationException("error.registration.validation.username.invalid");
         }
         // Check if the username is unique
         if (personRepo.findByUsername(username) != null) {
-            throw new ValidationException("Username is already taken");
+            throw new ValidationException("error.registration.validation.username.taken");
         }
         return username;
     }
@@ -170,7 +170,7 @@ public class ValidationService {
     public String validatePassword(String password) throws ValidationException {
         // Check if the password is not empty
         if (password == null || password.isEmpty()) {
-            throw new ValidationException("Password is required");
+            throw new ValidationException("error.registration.validation.password.required");
         }
         // Check if the password contains at least one digit, one lowercase letter and
         // one uppercase letter
@@ -178,7 +178,7 @@ public class ValidationService {
         // "(?=.*[!@#$%^&*()-_=+\\[\\]{};:'\",.<>\\/?])" to the regex
         if (!Pattern.matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{8,}$", password)) {
             throw new ValidationException(
-                    "Password must contain at least one digit, one lowercase letter, one uppercase letter and be at least 8 characters long");
+                    "error.registration.validation.password.invalid");
         }
         return password;
     }

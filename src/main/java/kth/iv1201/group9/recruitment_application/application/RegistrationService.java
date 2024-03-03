@@ -34,7 +34,7 @@ public class RegistrationService {
     @SuppressWarnings("null")
     public void handleRegisteredUser(PersonDTO userDTO) throws RegistrationException {
         if (userDTO == null) {
-            throw new IllegalArgumentException("UserDTO is null");
+            throw new IllegalArgumentException("error.registration.userDTO.null");
         }
         personRepo.save(validateInput(userDTO));
     }

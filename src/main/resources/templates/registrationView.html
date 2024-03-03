@@ -28,7 +28,7 @@
 
       <h1 th:text="#{regpage.header}"></h1>
       <p th:text="#{mainpage.subheader}"></p>
-      <p style="color: red;" th:if="${errorMessage}" th:text="${errorMessage}">Error message goes here</p>
+      <p style="color: red;" th:if="${errorMessage}" th:text="#{${errorMessage}}">Localized error message will be displayed here</p>
       <form th:action="@{/registration}" th:object="${person}" method="post" modelAttribute="person">
         <table>
           <tr>
