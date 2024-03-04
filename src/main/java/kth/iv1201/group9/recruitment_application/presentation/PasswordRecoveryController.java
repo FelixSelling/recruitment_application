@@ -9,8 +9,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import kth.iv1201.group9.recruitment_application.application.PasswordRecoveryService;
+import kth.iv1201.group9.recruitment_application.domain.DTO.PersonDTO;
 
 /**
  * This class is a controller responsible for handling password recovery
@@ -45,12 +47,39 @@ public class PasswordRecoveryController {
     public String handleEmail(String email) {
 
         try {
-            passwordRecoveryService.handlePasswordRecovery(email);
+            passwordRecoveryService.requestPasswordRecovery(email);
             return "redirect:/login?emailSent";
         } catch (Exception e) {
             e.printStackTrace();
             // TODO: handle exception
             return "passwordRecoveryView";
+        }
+
+    }
+
+    @GetMapping("/changePassword")
+    public String showChangePasswordView(@ModelAttribute("person") PersonDTO personDTO,
+            @RequestParam String token) {
+
+        if (token == null || passwordRecoveryService.verifyToken(token) == false) {
+            return "redirect:/login";
+        }
+        return "changePasswordView";
+
+    }
+
+    @PostMapping("/changePassword")
+    public String handlePassword(PersonDTO personDTO, String token) {
+
+        try {
+            System.out.println("Token: " + token);
+            passwordRecoveryService.changePassword(token, personDTO);
+
+            return "redirect:/login?emailSent";
+        } catch (Exception e) {
+            e.printStackTrace();
+            // TODO: handle exception
+            return "changePasswordView";
         }
 
     }

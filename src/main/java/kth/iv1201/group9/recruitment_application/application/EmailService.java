@@ -24,7 +24,7 @@ public class EmailService {
      * @param body    the body of the email
      */
     @Async
-    public void sendEmail(String to, String subject, String body) {
+    public void sendEmail(String to, String subject, String body, String token) {
         SimpleMailMessage message = new SimpleMailMessage();
         message.setFrom("nsona@kth.se");
         message.setTo(to);

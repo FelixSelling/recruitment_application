@@ -29,6 +29,7 @@ public class WebSecurityConfig {
                         .requestMatchers("/login/**").permitAll() // Everyone is allowed
                         .requestMatchers("/registration/**").permitAll() // Everyone is allowed
                         .requestMatchers("/passwordRecovery/**").permitAll() // Everyone is allowed
+                        .requestMatchers("/changePassword/**").permitAll() // Everyone is allowed
                         .requestMatchers("/recruiter/**").hasAnyAuthority("recruiter") // Only recruiters
                         .requestMatchers("/applicant/**").hasAnyAuthority("applicant") // Only applicants
                         .anyRequest().authenticated())
@@ -40,8 +41,3 @@ public class WebSecurityConfig {
         return new BCryptPasswordEncoder(12); // Specification for which
     }
 }
-
-/*
- * TODO:
- * Authorization Token timeout?
- */
