@@ -36,7 +36,9 @@ public class RegistrationService {
         if (userDTO == null) {
             throw new IllegalArgumentException("error.registration.userDTO.null");
         }
-        personRepo.save(validateInput(userDTO));
+        if (validateInput(userDTO) && checkUnique(userDTO)) {
+            personRepo.save(createUser(userDTO, 2));
+        }
     }
 
     /**
@@ -45,39 +47,52 @@ public class RegistrationService {
      * @param userDTO the data transfer object containing the user information
      * @throws RegistrationException if any of the input is invalid
      */
-    private Person validateInput(PersonDTO userDTO) throws RegistrationException {
-        String name;
-        String surname;
-        String email;
-        String pnr;
-        String username;
-        String password;
+    private boolean validateInput(PersonDTO userDTO) throws RegistrationException {
 
         // Validate the input
         try {
-            name = validationService.validateName(userDTO.getName());
-            surname = validationService.validateSurname(userDTO.getSurname());
-            email = validationService.validateEmail(userDTO.getEmail());
-            if (personRepo.findByEmail(email) != null) {
-                throw new ValidationException("error.registration.email.taken");
-            }
-            pnr = validationService.validatePnr(userDTO.getPnr());
-            username = validationService.validateUsername(userDTO.getUsername());
-            password = validationService.validatePassword(userDTO.getPassword());
+            validationService.validateName(userDTO.getName());
+            validationService.validateSurname(userDTO.getSurname());
+            validationService.validateEmail(userDTO.getEmail());
+            validationService.validatePnr(userDTO.getPnr());
+            validationService.validateUsername(userDTO.getUsername());
+            validationService.validatePassword(userDTO.getPassword());
         } catch (ValidationException ex) {
             ex.printStackTrace();
             throw new RegistrationException(ex.getMessage());
         }
 
-        // Create a new user and return it for saving
+        return true;
+    }
+
+    private boolean checkUnique(PersonDTO userDTO) throws RegistrationException {
+        // Check if the email is already taken
+        if (personRepo.findByEmail(userDTO.getEmail()) != null) {
+            throw new RegistrationException("error.registration.email.taken");
+        }
+
+        // Check if the pnr is already taken
+        if (personRepo.findByPnr(userDTO.getPnr()) != null) {
+            throw new RegistrationException("error.registration.pnr.taken");
+        }
+
+        // Check if the username is already taken
+        if (personRepo.findByUsername(userDTO.getUsername()) != null) {
+            throw new RegistrationException("error.registration.username.taken");
+        }
+
+        return true;
+    }
+
+    private Person createUser(PersonDTO userDTO, int roleID) {
         Person user = new Person();
-        user.setName(name);
-        user.setSurname(surname);
-        user.setEmail(email);
-        user.setPnr(pnr);
-        user.setUsername(username);
-        user.setRole(new Role(2));
-        user.setPassword(passwordEncoder.encode(password));
+        user.setName(userDTO.getName());
+        user.setSurname(userDTO.getSurname());
+        user.setEmail(userDTO.getEmail());
+        user.setPnr(userDTO.getPnr());
+        user.setUsername(userDTO.getUsername());
+        user.setRole(new Role(roleID));
+        user.setPassword(passwordEncoder.encode(userDTO.getPassword()));
         return user;
     }
 }

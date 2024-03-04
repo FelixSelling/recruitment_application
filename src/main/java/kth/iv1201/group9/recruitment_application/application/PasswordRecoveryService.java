@@ -2,7 +2,6 @@ package kth.iv1201.group9.recruitment_application.application;
 
 import java.util.Map;
 import java.util.UUID;
-import java.util.concurrent.ConcurrentHashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -11,7 +10,6 @@ import org.springframework.stereotype.Service;
 
 import kth.iv1201.group9.recruitment_application.domain.DTO.PersonDTO;
 import kth.iv1201.group9.recruitment_application.domain.entity.Person;
-import kth.iv1201.group9.recruitment_application.exception.RegistrationException;
 import kth.iv1201.group9.recruitment_application.exception.ValidationException;
 import kth.iv1201.group9.recruitment_application.repository.PersonRepository;
 
@@ -48,8 +46,8 @@ public class PasswordRecoveryService {
      * @throws ValidationException
      */
     public void requestPasswordRecovery(String email) throws ValidationException {
-        validationService.validateEmail(email);
-        if (personRepo.findByEmail(email) != null) {
+
+        if (validationService.validateEmail(email) && personRepo.findByEmail(email) != null) {
             String token = generateToken();
             tokenEmailMap.put(token, email);
             emailService.sendEmail(email, "Password recovery",
@@ -66,6 +64,7 @@ public class PasswordRecoveryService {
         Person p = personRepo.findByEmail(email);
         p.setPassword(passwordEncoder.encode(person.getPassword()));
         personRepo.save(p);
+        removeToken(token);
     }
 
     public void removeToken(String token) {

@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import kth.iv1201.group9.recruitment_application.application.PasswordRecoveryService;
 import kth.iv1201.group9.recruitment_application.application.ValidationService;
 import kth.iv1201.group9.recruitment_application.domain.DTO.PersonDTO;
-import kth.iv1201.group9.recruitment_application.exception.RegistrationException;
 import kth.iv1201.group9.recruitment_application.exception.ValidationException;
 
 /**
@@ -56,10 +55,12 @@ public class PasswordRecoveryController {
         try {
             passwordRecoveryService.requestPasswordRecovery(email);
             return "redirect:/login?recoveryEmailSent";
-        } catch (Exception e) {
-            e.printStackTrace();
-            // TODO: handle exception
-            return "passwordRecoveryView";
+        } catch (ValidationException e) {
+            return "redirect:/login?recoveryEmailSent";
+            // } catch (Exception e) {
+            // e.printStackTrace();
+            // // TODO: handle exception
+            // return "passwordRecoveryView";
         }
 
     }
