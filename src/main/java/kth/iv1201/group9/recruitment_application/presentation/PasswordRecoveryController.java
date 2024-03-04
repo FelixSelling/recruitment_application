@@ -6,13 +6,17 @@ package kth.iv1201.group9.recruitment_application.presentation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import kth.iv1201.group9.recruitment_application.application.PasswordRecoveryService;
+import kth.iv1201.group9.recruitment_application.application.ValidationService;
 import kth.iv1201.group9.recruitment_application.domain.DTO.PersonDTO;
+import kth.iv1201.group9.recruitment_application.exception.RegistrationException;
+import kth.iv1201.group9.recruitment_application.exception.ValidationException;
 
 /**
  * This class is a controller responsible for handling password recovery
@@ -25,6 +29,9 @@ import kth.iv1201.group9.recruitment_application.domain.DTO.PersonDTO;
 public class PasswordRecoveryController {
     @Autowired
     PasswordRecoveryService passwordRecoveryService;
+
+    @Autowired
+    ValidationService validationService;
 
     /**
      * Displays the password recovery view.
@@ -48,7 +55,7 @@ public class PasswordRecoveryController {
 
         try {
             passwordRecoveryService.requestPasswordRecovery(email);
-            return "redirect:/login?emailSent";
+            return "redirect:/login?recoveryEmailSent";
         } catch (Exception e) {
             e.printStackTrace();
             // TODO: handle exception
@@ -69,16 +76,17 @@ public class PasswordRecoveryController {
     }
 
     @PostMapping("/changePassword")
-    public String handlePassword(PersonDTO personDTO, String token) {
+    public String handlePassword(PersonDTO personDTO, String token, Model model) {
 
         try {
-            System.out.println("Token: " + token);
             passwordRecoveryService.changePassword(token, personDTO);
-
-            return "redirect:/login?emailSent";
-        } catch (Exception e) {
-            e.printStackTrace();
-            // TODO: handle exception
+            return "redirect:/login?passwordChanged";
+        } catch (ValidationException ex) {
+            ex.printStackTrace();
+            model.addAttribute("errorMessage", ex.getMessage());
+            return "changePasswordView";
+        } catch (Exception ex) {
+            ex.printStackTrace();
             return "changePasswordView";
         }
 

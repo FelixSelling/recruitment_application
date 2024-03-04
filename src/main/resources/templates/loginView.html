@@ -62,6 +62,9 @@
           <tr>
             <td colspan="2" style="color: red;" th:if="${param.error}" th:text="#{mainpage.credentials.invalid}"></td>
             <td colspan="2" style="color: green;" th:if="${param.registered}" th:text="#{mainpage.registration.success}"></td>
+            <td colspan="2" style="color: green;" th:if="${param.recoveryEmailSent}" th:text="#{mainpage.recovery.email.success}"></td>
+            <td colspan="2" style="color: green;" th:if="${param.passwordChanged}" th:text="#{mainpage.recovery.password.success}"></td>
+
           </tr>
           <br>
           <tr>

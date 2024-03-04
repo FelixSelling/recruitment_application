@@ -58,6 +58,9 @@ public class RegistrationService {
             name = validationService.validateName(userDTO.getName());
             surname = validationService.validateSurname(userDTO.getSurname());
             email = validationService.validateEmail(userDTO.getEmail());
+            if (personRepo.findByEmail(email) != null) {
+                throw new ValidationException("error.registration.email.taken");
+            }
             pnr = validationService.validatePnr(userDTO.getPnr());
             username = validationService.validateUsername(userDTO.getUsername());
             password = validationService.validatePassword(userDTO.getPassword());

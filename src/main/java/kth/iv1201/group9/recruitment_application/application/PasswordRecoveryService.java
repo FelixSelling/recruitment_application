@@ -11,6 +11,8 @@ import org.springframework.stereotype.Service;
 
 import kth.iv1201.group9.recruitment_application.domain.DTO.PersonDTO;
 import kth.iv1201.group9.recruitment_application.domain.entity.Person;
+import kth.iv1201.group9.recruitment_application.exception.RegistrationException;
+import kth.iv1201.group9.recruitment_application.exception.ValidationException;
 import kth.iv1201.group9.recruitment_application.repository.PersonRepository;
 
 /**
@@ -43,28 +45,22 @@ public class PasswordRecoveryService {
      * console.
      *
      * @param email the email address for password recovery
+     * @throws ValidationException
      */
-    public void requestPasswordRecovery(String email) {
-
-        try {
-            validationService.validateEmail(email);
+    public void requestPasswordRecovery(String email) throws ValidationException {
+        validationService.validateEmail(email);
+        if (personRepo.findByEmail(email) != null) {
             String token = generateToken();
             tokenEmailMap.put(token, email);
-
             emailService.sendEmail(email, "Password recovery",
                     "Do not share this email with unauthorized people." +
                             " Click the link below to reset your password: \n \"http://localhost:8080/changePassword?token="
                             + token + "\"",
                     token);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            // TODO: handle exception
         }
-
     }
 
-    public void changePassword(String token, PersonDTO person) {
+    public void changePassword(String token, PersonDTO person) throws ValidationException {
         validationService.validatePassword(person.getPassword());
         String email = tokenEmailMap.get(token);
         Person p = personRepo.findByEmail(email);

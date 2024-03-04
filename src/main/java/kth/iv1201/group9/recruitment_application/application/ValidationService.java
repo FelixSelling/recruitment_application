@@ -85,9 +85,9 @@ public class ValidationService {
             throw new ValidationException("error.registration.validation.email.invalid");
         }
         // Check if the email is unique
-        if (personRepo.findByEmail(email) != null) {
-            throw new ValidationException("error.registration.validation.email.taken");
-        }
+        // if (personRepo.findByEmail(email) != null) {
+        // throw new ValidationException("error.registration.validation.email.taken");
+        // }
         return email;
     }
 
