@@ -2,6 +2,7 @@ package kth.iv1201.group9.recruitment_application.application;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.time.Year;
@@ -9,8 +10,10 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.regex.Pattern;
 
+import kth.iv1201.group9.recruitment_application.exception.ValidationException;
 import kth.iv1201.group9.recruitment_application.repository.PersonRepository;
 
+@Transactional
 @Service
 public class ValidationService {
     @Autowired
@@ -22,18 +25,18 @@ public class ValidationService {
      *
      * @param name the name to be validated
      * @return the validated name
-     * @throws IllegalArgumentException if the name is empty or contains non-regular
-     *                                  characters
+     * @throws ValidationException if the name is empty or contains non-regular
+     *                             characters
      */
-    public String validateName(String name) {
+    public String validateName(String name) throws ValidationException {
         // Check if the name is not empty
         if (name == null || name.isEmpty()) {
-            throw new IllegalArgumentException("Name is required");
+            throw new ValidationException("error.registration.validation.name.required");
         }
         // Check if the name contains only regular characters
         // a-z and A-Z
         if (!Pattern.matches("[a-zA-Z]+", name)) {
-            throw new IllegalArgumentException("Name can only contain regular characters");
+            throw new ValidationException("error.registration.validation.name.invalid");
         }
         return name;
     }
@@ -44,18 +47,18 @@ public class ValidationService {
      *
      * @param surname the surname to be validated
      * @return the validated surname
-     * @throws IllegalArgumentException if the surname is empty or contains
-     *                                  non-regular characters
+     * @throws ValidationException if the surname is empty or contains
+     *                             non-regular characters
      */
-    public String validateSurname(String surname) {
+    public String validateSurname(String surname) throws ValidationException {
         // Check if the surname is not empty
         if (surname == null || surname.isEmpty()) {
-            throw new IllegalArgumentException("Surname is required");
+            throw new ValidationException("error.registration.validation.surname.required");
         }
         // Check if the surname contains only regular characters
         // a-z and A-Z
         if (!Pattern.matches("[a-zA-Z]+", surname)) {
-            throw new IllegalArgumentException("Surname can only contain regular characters");
+            throw new ValidationException("error.registration.validation.surname.invalid");
         }
         return surname;
     }
@@ -66,20 +69,24 @@ public class ValidationService {
      *
      * @param email the email to be validated
      * @return the validated email
-     * @throws IllegalArgumentException if the email is empty or not a valid email
-     *                                  address
+     * @throws ValidationException if the email is empty or not a valid email
+     *                             address
      */
-    public String validateEmail(String email) {
+    public String validateEmail(String email) throws ValidationException {
         // Check if the email is not empty
         if (email == null || email.isEmpty()) {
-            throw new IllegalArgumentException("Email is required");
+            throw new ValidationException("error.registration.validation.email.required");
         }
         // Check if the email is valid
         // Source: https://howtodoinjava.com/regex/java-regex-validate-email-address/
         if (!Pattern.matches(
                 "^[\\w!#$%&amp;'*+/=?`{|}~^-]+(?:\\.[\\w!#$%&amp;'*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$",
                 email)) {
-            throw new IllegalArgumentException("Email is not valid");
+            throw new ValidationException("error.registration.validation.email.invalid");
+        }
+        // Check if the email is unique
+        if (personRepo.findByEmail(email) != null) {
+            throw new ValidationException("error.registration.validation.email.taken");
         }
         return email;
     }
@@ -90,14 +97,14 @@ public class ValidationService {
      *
      * @param pnr the personal number to be validated
      * @return the validated personal number
-     * @throws IllegalArgumentException if the pnr is empty, not in the correct
-     *                                  format, does not contain a valid date, can
-     *                                  not be validated or is not unique
+     * @throws ValidationException if the pnr is empty, not in the correct
+     *                             format, does not contain a valid date, can
+     *                             not be validated or is not unique
      */
-    public String validatePnr(String pnr) {
+    public String validatePnr(String pnr) throws ValidationException {
         // Check if the pnr is not empty
         if (pnr == null || pnr.isEmpty()) {
-            throw new IllegalArgumentException("Personal number is required");
+            throw new ValidationException("error.registration.validation.pnr.required");
         }
         // If 12 digits, add a hyphen after the 8th digit
         if (Pattern.matches("\\d{12}", pnr)) {
@@ -106,19 +113,19 @@ public class ValidationService {
         // Check if the pnr contains only digits and a hyphen, 8 digits followed by a
         // hyphen and 4 digits
         if (!Pattern.matches("\\d{8}-\\d{4}", pnr)) {
-            throw new IllegalArgumentException("Personal number needs to be in the format YYYYMMDD-XXXX");
+            throw new ValidationException("error.registration.validation.pnr.format.invalid");
         }
         // Check if the pnr contains a valid date
         if (!validDate(pnr.substring(0, 8))) {
-            throw new IllegalArgumentException("Personal number does not contain a valid date");
+            throw new ValidationException("error.registration.validation.pnr.date.invalid");
         }
         // Check if the pnr is a correct personal number
         if (!validPnr(pnr)) {
-            throw new IllegalArgumentException("Personal number can not be validated");
+            throw new ValidationException("error.registration.validation.pnr.invalid");
         }
         // Check if the pnr is unique
         if (personRepo.findByPnr(pnr) != null) {
-            throw new IllegalArgumentException("Personal number is already registered");
+            throw new ValidationException("error.registration.validation.pnr.taken");
         }
         return pnr;
     }
@@ -129,23 +136,23 @@ public class ValidationService {
      *
      * @param username the username to be validated
      * @return the validated username
-     * @throws IllegalArgumentException if the username is empty, contains
-     *                                  non-regular alphanumerical characters or is
-     *                                  not unique
+     * @throws ValidationException if the username is empty, contains
+     *                             non-regular alphanumerical characters or is
+     *                             not unique
      */
-    public String validateUsername(String username) {
+    public String validateUsername(String username) throws ValidationException {
         // Check if the username is not empty
         if (username == null || username.isEmpty()) {
-            throw new IllegalArgumentException("Username is required");
+            throw new ValidationException("error.registration.validation.username.required");
         }
         // Check if the username contains only regular alphanumerical characters
         // a-z, A-Z and 0-9
         if (!Pattern.matches("[a-zA-Z0-9]+", username)) {
-            throw new IllegalArgumentException("Username can only contain regular alphanumerical characters");
+            throw new ValidationException("error.registration.validation.username.invalid");
         }
         // Check if the username is unique
         if (personRepo.findByUsername(username) != null) {
-            throw new IllegalArgumentException("Username is already taken");
+            throw new ValidationException("error.registration.validation.username.taken");
         }
         return username;
     }
@@ -156,22 +163,22 @@ public class ValidationService {
      *
      * @param password the password to be validated
      * @return the validated password
-     * @throws IllegalArgumentException if the password is empty or does not contain
-     *                                  at least one digit, one lowercase letter and
-     *                                  one uppercase letter
+     * @throws ValidationException if the password is empty or does not contain
+     *                             at least one digit, one lowercase letter and
+     *                             one uppercase letter
      */
-    public String validatePassword(String password) {
+    public String validatePassword(String password) throws ValidationException {
         // Check if the password is not empty
         if (password == null || password.isEmpty()) {
-            throw new IllegalArgumentException("Password is required");
+            throw new ValidationException("error.registration.validation.password.required");
         }
         // Check if the password contains at least one digit, one lowercase letter and
         // one uppercase letter
         // To add a check for a special character, add
         // "(?=.*[!@#$%^&*()-_=+\\[\\]{};:'\",.<>\\/?])" to the regex
         if (!Pattern.matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{8,}$", password)) {
-            throw new IllegalArgumentException(
-                    "Password must contain at least one digit, one lowercase letter, one uppercase letter and be at least 8 characters long");
+            throw new ValidationException(
+                    "error.registration.validation.password.invalid");
         }
         return password;
     }

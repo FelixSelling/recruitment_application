@@ -28,7 +28,8 @@
 
       <h1 th:text="#{regpage.header}"></h1>
       <p th:text="#{mainpage.subheader}"></p>
-      <form th:action="@{/registration}" method="post" modelAttribute="person">
+      <p style="color: red;" th:if="${errorMessage}" th:text="#{${errorMessage}}">Localized error message will be displayed here</p>
+      <form th:action="@{/registration}" th:object="${person}" method="post" modelAttribute="person">
         <table>
           <tr>
             <td></td>
@@ -37,6 +38,7 @@
                 type="text"
                 id="name"
                 name="name"
+                th:field="*{name}"
                 th:placeholder="#{regpage.firstname}"
                 required
               />
@@ -49,6 +51,7 @@
                 type="text"
                 id="surname"
                 name="surname"
+                th:field="*{surname}"
                 th:placeholder="#{regpage.lastname}"
                 required
               />
@@ -61,6 +64,7 @@
                 type="email"
                 id="email"
                 name="email"
+                th:field="*{email}"
                 th:placeholder="#{regpage.email}"
                 required
               />
@@ -73,6 +77,7 @@
                 type="text"
                 id="pnr"
                 name="pnr"
+                th:field="*{pnr}"
                 th:placeholder="#{regpage.pnr}"
                 required
               />
@@ -85,6 +90,7 @@
                 type="text"
                 id="username"
                 name="username"
+                th:field="*{username}"
                 th:placeholder="#{default.username}"
                 required
               />

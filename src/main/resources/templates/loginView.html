@@ -60,14 +60,14 @@
             <td colspan="2"><input type="submit" th:value="#{mainpage.loginbtn}"></td>
           </tr>
           <tr>
-            <td colspan="2" style="color: red;" th:if="${param.error}">Invalid username or password</td>
-            <td colspan="2" style="color: green;" th:if="${param.registered}">You have been registered</td>
+            <td colspan="2" style="color: red;" th:if="${param.error}" th:text="#{mainpage.credentials.invalid}"></td>
+            <td colspan="2" style="color: green;" th:if="${param.registered}" th:text="#{mainpage.registration.success}"></td>
           </tr>
           <br>
           <tr>
             <td></td>
             <td>
-              <a th:href="@{/registration}" method="get"th:text="#{mainpage.createaccount}"></a>
+              <a th:href="@{/registration}" method="get" th:text="#{mainpage.createaccount}"></a>
             </td>
           </tr>
           <tr>
