@@ -2,12 +2,12 @@
 <html>
 
 <head>
-    <title>Error 403 - Forbidden</title>
+    <title th:text="#{error.http.403.title}"></title>
 </head>
 
 <body>
-    <h1>Error 403 - Forbidden</h1>
-    <p>You do not have permission to access this page.</p>
+    <h1 th:text="#{error.http.403.title}"></h1>
+    <p th:text="#{error.http.403.message}"></p>
 </body>
 
 </html>
