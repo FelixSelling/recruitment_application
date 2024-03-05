@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Error 401 - Unauthorized</title>
+    <title th:text="#{error.http.401.title}"></title>
     <link rel="stylesheet" type="text/css" href="/css/stylesheet.css" />
   </head>
 
   <body>
-    <h1>Error 401 - Unauthorized</h1>
-    <p>You do not have permission to access this page.</p>
+    <h1 th:text="#{error.http.401.title}"></h1>
+    <p th:text="#{error.http.401.message}"></p>
   </body>
 </html>
