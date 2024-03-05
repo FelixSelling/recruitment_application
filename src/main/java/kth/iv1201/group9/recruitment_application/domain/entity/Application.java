@@ -9,6 +9,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
 import kth.iv1201.group9.recruitment_application.domain.DTO.ApplicationDTO;
 
 /**
@@ -26,10 +28,14 @@ public class Application implements ApplicationDTO {
 
     @JoinColumn(name = "status_id", referencedColumnName = "status_id")
     @ManyToOne
+    @NotNull(message = "error.database.validation.application.status")
+    @Valid
     private Status status;
 
     @JoinColumn(name = "person_id", referencedColumnName = "person_id")
     @ManyToOne
+    @NotNull(message = "error.database.validation.application.person")
+    @Valid
     private Person person;
 
     /**

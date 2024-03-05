@@ -10,6 +10,9 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.DecimalMin;
+import jakarta.validation.constraints.NotNull;
 import kth.iv1201.group9.recruitment_application.domain.DTO.CompetenceProfileDTO;
 
 /**
@@ -25,16 +28,20 @@ public class CompetenceProfile implements CompetenceProfileDTO {
     @Column(name = "competence_profile_id")
     private Integer competenceProfileId;
 
-    // @Max(value=?) @Min(value=?)
     @Column(name = "years_of_experience")
+    @DecimalMin(value = "0", inclusive = false, message = "error.database.validation.competence_profile.yearsOfExperience.invalid")
+    @NotNull(message = "error.database.validation.competence_profile.yearsOfExperience.null")
     private BigDecimal yearsOfExperience;
 
     @JoinColumn(name = "competence_id", referencedColumnName = "competence_id")
     @ManyToOne
+    @NotNull(message = "error.database.validation.competence_profile.competence.null")
     private Competence competence;
 
     @JoinColumn(name = "person_id", referencedColumnName = "person_id")
     @ManyToOne
+    @NotNull(message = "error.database.validation.competence_profile.person.null")
+    @Valid
     private Person person;
 
     public CompetenceProfile() {

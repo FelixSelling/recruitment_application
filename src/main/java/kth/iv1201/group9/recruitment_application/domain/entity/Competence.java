@@ -10,6 +10,8 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotBlank;
 import kth.iv1201.group9.recruitment_application.domain.DTO.CompetenceDTO;
 import kth.iv1201.group9.recruitment_application.domain.DTO.CompetenceProfileDTO;
 
@@ -27,9 +29,11 @@ public class Competence implements CompetenceDTO {
     private Integer competenceId;
 
     @Column(name = "name")
+    @NotBlank(message = "error.database.validation.competence.name.blank")
     private String name;
 
     @OneToMany(mappedBy = "competence")
+    @Valid
     private List<CompetenceProfile> competenceProfileList;
 
     /**

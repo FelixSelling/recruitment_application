@@ -9,6 +9,8 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotBlank;
 import kth.iv1201.group9.recruitment_application.domain.DTO.PersonDTO;
 import kth.iv1201.group9.recruitment_application.domain.DTO.RoleDTO;
 
@@ -26,9 +28,11 @@ public class Role implements RoleDTO {
     private Integer roleId;
 
     @Column(name = "name")
+    @NotBlank(message = "error.database.validation.role.name.blank")
     private String name;
 
     @OneToMany(mappedBy = "role")
+    @Valid
     private List<Person> personList;
 
     /**

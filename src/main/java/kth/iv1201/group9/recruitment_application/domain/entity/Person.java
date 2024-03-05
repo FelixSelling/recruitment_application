@@ -18,6 +18,11 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 import kth.iv1201.group9.recruitment_application.domain.DTO.AvailabilityDTO;
 import kth.iv1201.group9.recruitment_application.domain.DTO.CompetenceProfileDTO;
 import kth.iv1201.group9.recruitment_application.domain.DTO.PersonDTO;
@@ -36,31 +41,43 @@ public class Person implements PersonDTO, UserDetails {
     private Integer personId;
 
     @Column(name = "name")
+    @NotBlank(message = "error.database.validation.person.name.blank")
     private String name;
 
     @Column(name = "surname")
+    @NotBlank(message = "error.database.validation.person.surname.blank")
     private String surname;
 
     @Column(name = "pnr")
+    @NotNull(message = "error.database.validation.person.pnr.null")
+    @Pattern(regexp = "\\d{8}-\\d{4}", message = "error.database.validation.person.pnr.format")
     private String pnr;
 
     @Column(name = "email")
+    @NotNull(message = "error.database.validation.person.email.null")
+    @Email(message = "error.database.validation.person.email.format")
     private String email;
 
     @Column(name = "password")
+    @NotBlank(message = "error.database.validation.person.password.blank")
     private String password;
 
     @Column(name = "username")
+    @NotBlank(message = "error.database.validation.person.username.blank")
     private String username;
 
     @JoinColumn(name = "role_id", referencedColumnName = "role_id")
     @ManyToOne
+    @NotNull(message = "error.database.validation.person.role.null")
+    @Valid
     private Role role;
 
     @OneToMany(mappedBy = "person")
+    @Valid
     private List<CompetenceProfile> competenceProfileList;
 
     @OneToMany(mappedBy = "person")
+    @Valid
     private List<Availability> availabilityList;
 
     /**

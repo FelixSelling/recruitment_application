@@ -12,6 +12,8 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
 import kth.iv1201.group9.recruitment_application.domain.DTO.AvailabilityDTO;
 
 /**
@@ -29,14 +31,18 @@ public class Availability implements AvailabilityDTO {
 
     @Column(name = "from_date")
     @Temporal(TemporalType.DATE)
+    @NotNull(message = "error.database.validation.availability.fromDate.null")
     private Date fromDate;
 
     @Column(name = "to_date")
     @Temporal(TemporalType.DATE)
+    @NotNull(message = "error.database.validation.availability.toDate.null")
     private Date toDate;
 
     @JoinColumn(name = "person_id", referencedColumnName = "person_id")
     @ManyToOne
+    @NotNull(message = "error.database.validation.availability.person.null")
+    @Valid
     private Person person;
 
     /**
