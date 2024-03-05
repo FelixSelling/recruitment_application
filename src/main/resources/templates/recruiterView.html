@@ -16,6 +16,9 @@
   </head>
 
   <body>
+    <div th:replace="~{fragments/header :: header}"></div>
+
+    <div layout:fragment="content">
     <h1 th:text="#{recruiterpage.header}"></h1>
 
     <form th:action="@{/logout}" method="post">
@@ -50,5 +53,6 @@
         </td>
       </tr>
     </table>
+    </div>
   </body>
 </html>

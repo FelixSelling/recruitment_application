@@ -21,6 +21,9 @@
     </head>
 
     <body>
+      <div th:replace="~{fragments/header :: header}"></div>
+
+      <div layout:fragment="content">
       <p>
         <a th:href="@{/registration?lang=en}" th:text="#{lang.en}"></a>
         <a th:href="@{/registration?lang=sv}" th:text="#{lang.sv}"></a>
@@ -117,6 +120,7 @@
           </tr>
         </table>
       </form>
+      </div>
     </body>
   </html>
 </html>

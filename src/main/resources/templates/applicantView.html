@@ -16,6 +16,9 @@ layout:decorate="~{resources/fragments/layout}">
     </style>
   </head>
   <body>
+    <div th:replace="~{fragments/header :: header}"></div>
+
+    <div layout:fragment="content">
     <h1 th:text="#{applicantpage.header}"></h1>
 
     <form th:action="@{/logout}" method="post">
@@ -28,5 +31,6 @@ layout:decorate="~{resources/fragments/layout}">
     </p>
 
     <p th:text="#{applicantpage.subheader}"></p>
+    </div>
   </body>
 </html>

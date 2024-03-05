@@ -21,6 +21,9 @@
     </head>
 
     <body>
+      <div th:replace="~{fragments/header :: header}"></div>
+
+      <div layout:fragment="content">
 
       <p>
         <a th:href="@{/login?lang=en}" th:text="#{lang.en}"></a>
@@ -72,6 +75,7 @@
           </tr>
         </table>
       </form>
+      </div>
     </body>
   </html>
 </html>
