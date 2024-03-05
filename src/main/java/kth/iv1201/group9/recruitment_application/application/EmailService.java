@@ -24,7 +24,7 @@ public class EmailService {
      * @param body    the body of the email
      */
     @Async
-    public void sendEmail(String to, String subject, String body, String token) {
+    public void sendEmail(String to, String subject, String body) {
         SimpleMailMessage message = new SimpleMailMessage();
         message.setFrom(System.getenv("KTH_USERNAME") + "@kth.se");
         message.setTo(to);
