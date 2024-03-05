@@ -7,6 +7,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotNull;
 import kth.iv1201.group9.recruitment_application.domain.DTO.StatusDTO;
 
 /**
@@ -23,6 +24,7 @@ public class Status implements StatusDTO {
     private Integer statusId;
 
     @Column(name = "status_number")
+    @NotNull(message = "error.database.validation.Status.statusNumber.null")
     private Integer statusNumber;
 
     /**
