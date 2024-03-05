@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+layout:decorate="~{resources/fragments/layout}">
   <head>
     <title>Recruitment App</title>
     <style>
@@ -14,8 +15,10 @@
       }
     </style>
   </head>
-
   <body>
+    <div th:replace="~{fragments/header :: header}"></div>
+
+    <div layout:fragment="content">
     <h1 th:text="#{applicantpage.header}"></h1>
 
     <form th:action="@{/logout}" method="post">
@@ -28,5 +31,6 @@
     </p>
 
     <p th:text="#{applicantpage.subheader}"></p>
+    </div>
   </body>
 </html>
