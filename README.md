@@ -38,5 +38,6 @@ The following environment variables need to be set before running the project:
 - `JDBC_DATABASE_URL`: The URL of the database connection.
 - `JDBC_DATABASE_USERNAME`: The username for accessing the database.
 - `JDBC_DATABASE_PASSWORD`: The password for accessing the database.
-
-Make sure to set these environment variables with the appropriate values before running the project.
+- `KTH_USERNAME`: The username for SMTP authentication.
+- `KTH_PASSWORD`: The password for SMTP authentication.
+  Make sure to set these environment variables with the appropriate values before running the project.

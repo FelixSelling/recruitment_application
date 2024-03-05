@@ -26,7 +26,7 @@ public class AuthenticationSuccessHandlerConfig implements AuthenticationSuccess
         } else if (roles.contains("applicant")) {
             redirectStrategy.sendRedirect(request, response, "/applicant");
         } else {
-            throw new IllegalStateException();
+            throw new IllegalStateException("error.login.role.notfound");
         }
     }
 }

@@ -1,32 +1,30 @@
 <!DOCTYPE html>
-<html>
+<html
+  lang="en"
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{resources/fragments/layout}"
+>
   <head>
     <title>Recruitment App</title>
-    <style>
-      /* Styling for the body */
-      body {
-        display: flex;
-        flex-direction: column;
-        justify-content: normal;
-        align-items: center;
-        height: 100vh;
-        margin: 0;
-      }
-    </style>
+    <link rel="stylesheet" type="text/css" href="/css/stylesheet.css" />
   </head>
-
   <body>
-    <h1 th:text="#{applicantpage.header}"></h1>
+    <div th:replace="~{fragments/header :: header}"></div>
 
-    <form th:action="@{/logout}" method="post">
-      <input type="submit" th:value="#{default.logoutbtn}" />
-    </form>
+    <div class="main" layout:fragment="content">
+      <h1 th:text="#{applicantpage.header}"></h1>
 
-    <p>
-      <a th:href="@{/applicant?lang=en}" th:text="#{lang.en}"></a>
-      <a th:href="@{/applicant?lang=sv}" th:text="#{lang.sv}"></a>
-    </p>
+      <form th:action="@{/logout}" method="post">
+        <input type="submit" th:value="#{default.logoutbtn}" />
+      </form>
 
-    <p th:text="#{applicantpage.subheader}"></p>
+      <p>
+        <a th:href="@{/applicant?lang=en}" th:text="#{lang.en}"></a>
+        <a th:href="@{/applicant?lang=sv}" th:text="#{lang.sv}"></a>
+      </p>
+
+      <p th:text="#{applicantpage.subheader}"></p>
+    </div>
   </body>
 </html>

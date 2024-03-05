@@ -1,13 +1,12 @@
 <!DOCTYPE html>
 <html>
+  <head>
+    <title th:text="#{error.http.400.title}"></title>
+    <link rel="stylesheet" type="text/css" href="/css/stylesheet.css" />
+  </head>
 
-<head>
-    <title>Error 400 - Bad Request</title>
-</head>
-
-<body>
-    <h1>Error 400 - Bad Request</h1>
-    <p>Your request could not be understood by the server.</p>
-</body>
-
+  <body>
+    <h1 th:text="#{error.http.400.title}"></h1>
+    <p th:text="#{error.http.400.message}"></p>
+  </body>
 </html>

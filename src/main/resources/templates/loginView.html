@@ -3,24 +3,13 @@
   <html>
     <head>
       <title>Recruitment App</title>
-      <style>
-        /* Styling for the body */
-        body {
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          align-items: center;
-          height: 100vh;
-          margin: 0;
-        }
-        /* Styling for the form */
-        form {
-          text-align: center;
-        }
-      </style>
+      <link rel="stylesheet" type="text/css" href="/css/stylesheet.css" />
     </head>
 
     <body>
+      <div th:replace="~{fragments/header :: header}"></div>
+
+      <div class="main" layout:fragment="content">
 
       <p>
         <a th:href="@{/login?lang=en}" th:text="#{lang.en}"></a>
@@ -60,18 +49,28 @@
             <td colspan="2"><input type="submit" th:value="#{mainpage.loginbtn}"></td>
           </tr>
           <tr>
-            <td colspan="2" style="color: red;" th:if="${param.error}">Invalid username or password</td>
-            <td colspan="2" style="color: green;" th:if="${param.registered}">You have been registered</td>
+            <td colspan="2" style="color: red;" th:if="${param.error}" th:text="#{mainpage.credentials.invalid}"></td>
+            <td colspan="2" style="color: green;" th:if="${param.registered}" th:text="#{mainpage.registration.success}"></td>
+            <td colspan="2" style="color: green;" th:if="${param.recoveryEmailSent}" th:text="#{mainpage.recovery.email.success}"></td>
+            <td colspan="2" style="color: green;" th:if="${param.passwordChanged}" th:text="#{mainpage.recovery.password.success}"></td>
+
           </tr>
           <br>
           <tr>
             <td></td>
             <td>
-              <a th:href="@{/registration}" method="get"th:text="#{mainpage.createaccount}"></a>
+              <a th:href="@{/registration}" method="get" th:text="#{mainpage.createaccount}"></a>
+            </td>
+          </tr>
+          <tr>
+            <td></td>
+            <td>
+              <a th:href="@{/passwordRecovery}" method="get"th:text="#{login.forgotpassword}"></a>
             </td>
           </tr>
         </table>
       </form>
+      </div>
     </body>
   </html>
 </html>

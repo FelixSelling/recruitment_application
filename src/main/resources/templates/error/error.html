@@ -1,13 +1,12 @@
 <!DOCTYPE html>
 <html>
+  <head>
+    <title th:text="#{error.http.generic.title}"></title>
+    <link rel="stylesheet" type="text/css" href="/css/stylesheet.css" />
+  </head>
 
-<head>
-    <title>Error</title>
-</head>
-
-<body>
-    <h1>Oops! Something went wrong.</h1>
-    <p>We apologize for the inconvenience. Please try again later.</p>
-</body>
-
+  <body>
+    <h1 th:text="#{error.http.generic.subtitle}"></h1>
+    <p th:text="#{error.http.generic.message}"></p>
+  </body>
 </html>
