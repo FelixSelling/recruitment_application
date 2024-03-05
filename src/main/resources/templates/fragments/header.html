@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <title>Title</title>
+    </head>
+    <body>
+<header th:fragment="header">
+    <h1 th:text="#{header.header}"></h1>
+    <nav>
+        <ul>
+            <li><a th:href="@{/applicant?lang=en}" th:text="#{lang.en}"></a></li>
+            <li><a th:href="@{/applicant?lang=sv}" th:text="#{lang.sv}"></a></li>
+        </ul>
+    </nav>
+</header>
+</body>
+</html>
+
+
+
