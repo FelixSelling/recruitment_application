@@ -52,11 +52,13 @@ public class PasswordRecoveryService {
         if (validationService.validateEmail(email) && personRepo.findByEmail(email) != null) {
             String token = generateToken();
             tokenEmailMap.put(token, email);
+
+            String baseUrl = System.getenv("BASE_URL");
+            String passwordResetLink = baseUrl + "changePassword?token=" + token;
+
             emailService.sendEmail(email, "Password recovery",
                     "Do not share this email with unauthorized people." +
-                            " Click the link below to reset your password: \n \"http://localhost:8080/changePassword?token="
-                            + token + "\"",
-                    token);
+                            " Click the link below to reset your password: \n \"" + passwordResetLink + "\"");
         }
     }
 
