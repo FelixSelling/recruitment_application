@@ -8,7 +8,9 @@ import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.http.HttpServletRequest;
 
 /**
- * This class is a controller that handles custom error pages for different HTTP status codes.
+ * This class is a controller that handles custom error pages for different
+ * HTTP
+ * status codes.
  */
 @Controller
 public class CustomErrorController implements ErrorController {
