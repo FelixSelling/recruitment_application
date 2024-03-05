@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import kth.iv1201.group9.recruitment_application.domain.DTO.PersonDTO;
 import kth.iv1201.group9.recruitment_application.domain.entity.Person;
@@ -17,6 +18,7 @@ import kth.iv1201.group9.recruitment_application.repository.PersonRepository;
  * This class represents a service for handling password recovery functionality.
  * 
  */
+@Transactional
 @Service
 public class PasswordRecoveryService {
     @Autowired
