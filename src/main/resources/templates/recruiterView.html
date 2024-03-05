@@ -7,7 +7,7 @@
 
   <body>
     <div th:replace="~{fragments/header :: header}"></div>
-    <div layout:fragment="content">
+    <div class="main" layout:fragment="content">
       <h1 th:text="#{recruiterpage.header}"></h1>
       <form th:action="@{/logout}" method="post">
         <input type="submit" th:value="#{default.logoutbtn}" />

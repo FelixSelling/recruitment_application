@@ -6,6 +6,7 @@ import org.springframework.context.support.ReloadableResourceBundleMessageSource
 import org.springframework.lang.NonNull;
 import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 import org.springframework.web.servlet.i18n.SessionLocaleResolver;
@@ -19,9 +20,9 @@ import java.util.Locale;
 public class AppConfig implements WebMvcConfigurer {
 
     /**
-    * Create a org.springframework.web.servlet.SessionLocaleResolver
-    * that stores the user's current locale in the session object.
-    */
+     * Create a org.springframework.web.servlet.SessionLocaleResolver
+     * that stores the user's current locale in the session object.
+     */
     @Bean
     LocaleResolver localeResolver() {
         SessionLocaleResolver resolver = new SessionLocaleResolver();
@@ -43,7 +44,8 @@ public class AppConfig implements WebMvcConfigurer {
 
     /**
      * Add the configured LocaleChangeInterceptor to the InterceptorRegistry.
-     * This interceptor will handle requests to change the user's locale based on the "lang" parameter.
+     * This interceptor will handle requests to change the user's locale based on
+     * the "lang" parameter.
      */
     @Override
     public void addInterceptors(@NonNull InterceptorRegistry registry) {
@@ -52,7 +54,8 @@ public class AppConfig implements WebMvcConfigurer {
 
     /**
      * Configure a ReloadableResourceBundleMessageSource bean for handling
-     * message sources in the application. The base name is set to "classpath:/Messages"
+     * message sources in the application. The base name is set to
+     * "classpath:/Messages"
      * with a default encoding of UTF-8.
      */
     @Bean
@@ -61,6 +64,13 @@ public class AppConfig implements WebMvcConfigurer {
         messageSource.setBasename("classpath:/Messages");
         messageSource.setDefaultEncoding("UTF-8");
         return messageSource;
+    }
+
+    @SuppressWarnings("null")
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        registry.addResourceHandler("/css/**")
+                .addResourceLocations("classpath:/static/css/");
     }
 
     /**
@@ -89,7 +99,8 @@ public class AppConfig implements WebMvcConfigurer {
 
     /**
      * Configure a SpringResourceTemplateResolver bean for resolving templates
-     * in the application. It sets the prefix, suffix, template mode, character encoding,
+     * in the application. It sets the prefix, suffix, template mode, character
+     * encoding,
      * and cacheability (disabled for development).
      */
     @Bean

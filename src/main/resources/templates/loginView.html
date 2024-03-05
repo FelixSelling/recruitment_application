@@ -9,7 +9,7 @@
     <body>
       <div th:replace="~{fragments/header :: header}"></div>
 
-      <div layout:fragment="content">
+      <div class="main" layout:fragment="content">
 
       <p>
         <a th:href="@{/login?lang=en}" th:text="#{lang.en}"></a>
