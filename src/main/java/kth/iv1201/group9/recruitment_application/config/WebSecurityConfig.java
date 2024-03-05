@@ -30,6 +30,7 @@ public class WebSecurityConfig {
                         .requestMatchers("/registration/**").permitAll() // Everyone is allowed
                         .requestMatchers("/passwordRecovery/**").permitAll() // Everyone is allowed
                         .requestMatchers("/changePassword/**").permitAll() // Everyone is allowed
+                        .requestMatchers("/css/**").permitAll() // Everyone is allowed
                         .requestMatchers("/recruiter/**").hasAnyAuthority("recruiter") // Only recruiters
                         .requestMatchers("/applicant/**").hasAnyAuthority("applicant") // Only applicants
                         .anyRequest().authenticated())

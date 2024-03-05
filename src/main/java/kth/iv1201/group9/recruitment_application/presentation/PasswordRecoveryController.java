@@ -51,16 +51,11 @@ public class PasswordRecoveryController {
      */
     @PostMapping("/passwordRecovery")
     public String handleEmail(String email) {
-
         try {
             passwordRecoveryService.requestPasswordRecovery(email);
             return "redirect:/login?recoveryEmailSent";
         } catch (ValidationException e) {
             return "redirect:/login?recoveryEmailSent";
-            // } catch (Exception e) {
-            // e.printStackTrace();
-            // // TODO: handle exception
-            // return "passwordRecoveryView";
         }
 
     }
@@ -68,7 +63,6 @@ public class PasswordRecoveryController {
     @GetMapping("/changePassword")
     public String showChangePasswordView(@ModelAttribute("person") PersonDTO personDTO,
             @RequestParam String token) {
-
         if (token == null || passwordRecoveryService.verifyToken(token) == false) {
             return "redirect:/login";
         }
@@ -83,11 +77,7 @@ public class PasswordRecoveryController {
             passwordRecoveryService.changePassword(token, personDTO);
             return "redirect:/login?passwordChanged";
         } catch (ValidationException ex) {
-            ex.printStackTrace();
             model.addAttribute("errorMessage", ex.getMessage());
-            return "changePasswordView";
-        } catch (Exception ex) {
-            ex.printStackTrace();
             return "changePasswordView";
         }
 

@@ -3,140 +3,126 @@
   <html>
     <head>
       <title>Recruitment App</title>
-      <style>
-        /* Styling for the body */
-        body {
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          align-items: center;
-          height: 100vh;
-          margin: 0;
-        }
-        /* Styling for the form */
-        form {
-          text-align: center;
-        }
-      </style>
+      <link rel="stylesheet" type="text/css" href="/css/stylesheet.css" />
     </head>
 
     <body>
       <div th:replace="~{fragments/header :: header}"></div>
 
       <div layout:fragment="content">
-      <p>
-        <a th:href="@{/registration?lang=en}" th:text="#{lang.en}"></a>
-        <a th:href="@{/registration?lang=sv}" th:text="#{lang.sv}"></a>
-      </p>
+        <p>
+          <a th:href="@{/registration?lang=en}" th:text="#{lang.en}"></a>
+          <a th:href="@{/registration?lang=sv}" th:text="#{lang.sv}"></a>
+        </p>
 
-      <h1 th:text="#{regpage.header}"></h1>
-      <p th:text="#{mainpage.subheader}"></p>
-      <p
-        style="color: red"
-        th:if="${errorMessage}"
-        th:text="#{${errorMessage}}"
-      >
-        Localized error message will be displayed here
-      </p>
-      <form
-        th:action="@{/registration}"
-        th:object="${person}"
-        method="post"
-        modelAttribute="person"
-      >
-        <table>
-          <tr>
-            <td></td>
-            <td>
-              <input
-                type="text"
-                id="name"
-                name="name"
-                th:field="*{name}"
-                th:placeholder="#{regpage.firstname}"
-                required
-              />
-            </td>
-          </tr>
-          <tr>
-            <td></td>
-            <td>
-              <input
-                type="text"
-                id="surname"
-                name="surname"
-                th:field="*{surname}"
-                th:placeholder="#{regpage.lastname}"
-                required
-              />
-            </td>
-          </tr>
-          <tr>
-            <td></td>
-            <td>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                th:field="*{email}"
-                th:placeholder="#{regpage.email}"
-                required
-              />
-            </td>
-          </tr>
-          <tr>
-            <td></td>
-            <td>
-              <input
-                type="text"
-                id="pnr"
-                name="pnr"
-                th:field="*{pnr}"
-                th:placeholder="#{regpage.pnr}"
-                required
-              />
-            </td>
-          </tr>
-          <tr>
-            <td></td>
-            <td>
-              <input
-                type="text"
-                id="username"
-                name="username"
-                th:field="*{username}"
-                th:placeholder="#{default.username}"
-                required
-              />
-            </td>
-          </tr>
-          <tr>
-            <td></td>
-            <td>
-              <input
-                type="password"
-                id="password"
-                name="password"
-                th:placeholder="#{default.password}"
-                required
-              />
-            </td>
-          </tr>
-          <!--Show if bad credentials-->
-          <tr>
-            <td colspan="2">
-              <input type="submit" th:value="#{regpage.accountdone}" />
-            </td>
-          </tr>
+        <h1 th:text="#{regpage.header}"></h1>
+        <p th:text="#{mainpage.subheader}"></p>
+        <p
+          style="color: red"
+          th:if="${errorMessage}"
+          th:text="#{${errorMessage}}"
+        >
+          Localized error message will be displayed here
+        </p>
+        <form
+          th:action="@{/registration}"
+          th:object="${person}"
+          method="post"
+          modelAttribute="person"
+        >
+          <table>
+            <tr>
+              <td></td>
+              <td>
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  th:field="*{name}"
+                  th:placeholder="#{regpage.firstname}"
+                  required
+                />
+              </td>
+            </tr>
+            <tr>
+              <td></td>
+              <td>
+                <input
+                  type="text"
+                  id="surname"
+                  name="surname"
+                  th:field="*{surname}"
+                  th:placeholder="#{regpage.lastname}"
+                  required
+                />
+              </td>
+            </tr>
+            <tr>
+              <td></td>
+              <td>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  th:field="*{email}"
+                  th:placeholder="#{regpage.email}"
+                  required
+                />
+              </td>
+            </tr>
+            <tr>
+              <td></td>
+              <td>
+                <input
+                  type="text"
+                  id="pnr"
+                  name="pnr"
+                  th:field="*{pnr}"
+                  th:placeholder="#{regpage.pnr}"
+                  required
+                />
+              </td>
+            </tr>
+            <tr>
+              <td></td>
+              <td>
+                <input
+                  type="text"
+                  id="username"
+                  name="username"
+                  th:field="*{username}"
+                  th:placeholder="#{default.username}"
+                  required
+                />
+              </td>
+            </tr>
+            <tr>
+              <td></td>
+              <td>
+                <input
+                  type="password"
+                  id="password"
+                  name="password"
+                  th:placeholder="#{default.password}"
+                  required
+                />
+              </td>
+            </tr>
+            <!--Show if bad credentials-->
+            <tr>
+              <td colspan="2">
+                <input type="submit" th:value="#{regpage.accountdone}" />
+              </td>
+            </tr>
 
-          <tr>
-            <td></td>
-            <td>
-              <a th:href="@{/login}" th:text="#{regpage.back}"></a>
-            </td>
-          </tr>
-        </table>
-      </form>
+            <tr>
+              <td></td>
+              <td>
+                <a th:href="@{/login}" th:text="#{regpage.back}"></a>
+              </td>
+            </tr>
+          </table>
+        </form>
       </div>
     </body>
   </html>
