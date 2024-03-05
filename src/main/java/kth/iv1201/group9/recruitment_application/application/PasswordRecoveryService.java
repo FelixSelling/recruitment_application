@@ -54,7 +54,7 @@ public class PasswordRecoveryService {
             tokenEmailMap.put(token, email);
 
             String baseUrl = System.getenv("BASE_URL");
-            String passwordResetLink = baseUrl + "/changePassword?token=" + token;
+            String passwordResetLink = baseUrl + "changePassword?token=" + token;
 
             emailService.sendEmail(email, "Password recovery",
                     "Do not share this email with unauthorized people." +

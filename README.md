@@ -41,4 +41,4 @@ The following environment variables need to be set before running the project:
 - `KTH_USERNAME`: The username for SMTP authentication.
 - `KTH_PASSWORD`: The password for SMTP authentication.
   Make sure to set these environment variables with the appropriate values before running the project.
-- `BASE_URL`: The url of the website. For local setup use "http://localhost:8080".
+- `BASE_URL`: The url of the website. For local setup use "http://localhost:8080/".
