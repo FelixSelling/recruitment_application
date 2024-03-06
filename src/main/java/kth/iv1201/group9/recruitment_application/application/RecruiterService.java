@@ -10,18 +10,23 @@ import org.springframework.transaction.annotation.Transactional;
 import kth.iv1201.group9.recruitment_application.domain.DTO.ApplicationDTO;
 import kth.iv1201.group9.recruitment_application.repository.ApplicationRepository;
 
+/**
+ * This class represents the service for handling recruiter-related operations.
+ * 
+ */
 @Transactional
 @Service
 public class RecruiterService {
-    /**
-     * Retrieves a list of all applicantions.
-     * 
-     * @return the list of all applicantions
-     */
+
     @Autowired
     private ApplicationRepository applicationRepository;
 
-    public List<ApplicationDTO> getApplicantionsList() {
+    /**
+     * Retrieves a list of all applications.
+     * 
+     * @return the list of all applications
+     */
+    public List<ApplicationDTO> getApplicationsList() {
         return new ArrayList<>(applicationRepository.findAll());
     }
 }

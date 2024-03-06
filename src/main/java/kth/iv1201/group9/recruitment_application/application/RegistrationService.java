@@ -12,6 +12,10 @@ import kth.iv1201.group9.recruitment_application.exception.RegistrationException
 import kth.iv1201.group9.recruitment_application.exception.ValidationException;
 import kth.iv1201.group9.recruitment_application.repository.PersonRepository;
 
+/**
+ * Service class responsible for handling user registration.
+ * 
+ */
 @Transactional
 @Service
 public class RegistrationService {
@@ -42,10 +46,12 @@ public class RegistrationService {
     }
 
     /**
-     * Validated the input and returns a new user.
-     * 
-     * @param userDTO the data transfer object containing the user information
-     * @throws RegistrationException if any of the input is invalid
+     * Validates the input provided in the PersonDTO object.
+     *
+     * @param userDTO the PersonDTO object containing the user's information
+     * @return true if the input is valid
+     * @throws RegistrationException if there is an error during the registration
+     *                               process
      */
     private boolean validateInput(PersonDTO userDTO) throws RegistrationException {
 
@@ -58,13 +64,19 @@ public class RegistrationService {
             validationService.validateUsername(userDTO.getUsername());
             validationService.validatePassword(userDTO.getPassword());
         } catch (ValidationException ex) {
-            ex.printStackTrace();
             throw new RegistrationException(ex.getMessage());
         }
 
         return true;
     }
 
+    /**
+     * Checks if the provided userDTO has unique email, pnr, and username.
+     * 
+     * @param userDTO the PersonDTO object containing the user information
+     * @return true if the email, pnr, and username are unique
+     * @throws RegistrationException if the email, pnr, or username is already taken
+     */
     private boolean checkUnique(PersonDTO userDTO) throws RegistrationException {
         // Check if the email is already taken
         if (personRepo.findByEmail(userDTO.getEmail()) != null) {
@@ -84,6 +96,13 @@ public class RegistrationService {
         return true;
     }
 
+    /**
+     * Creates a Person object from the provided PersonDTO object.
+     * 
+     * @param userDTO the PersonDTO object containing the user information
+     * @param roleID  the ID of the role to be assigned to the user
+     * @return the Person object created from the PersonDTO object
+     */
     private Person createUser(PersonDTO userDTO, int roleID) {
         Person user = new Person();
         user.setName(userDTO.getName());

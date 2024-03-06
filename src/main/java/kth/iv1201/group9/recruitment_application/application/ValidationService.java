@@ -11,6 +11,12 @@ import java.util.regex.Pattern;
 
 import kth.iv1201.group9.recruitment_application.exception.ValidationException;
 
+/**
+ * The ValidationService class provides methods for validating various types of
+ * data,
+ * such as names, surnames, email addresses, personal numbers, usernames, and
+ * passwords.
+ */
 @Transactional
 @Service
 public class ValidationService {
@@ -18,10 +24,10 @@ public class ValidationService {
     /**
      * Validates a name by checking if it is not empty and contains only regular
      * characters (a-z and A-Z).
-     *
+     * 
      * @param name the name to be validated
-     * @return the validated name
-     * @throws ValidationException if the name is empty or contains non-regular
+     * @return true if the name is valid
+     * @throws ValidationException if the name is empty or contains invalid
      *                             characters
      */
     public boolean validateName(String name) throws ValidationException {
@@ -42,9 +48,9 @@ public class ValidationService {
      * characters (a-z and A-Z).
      *
      * @param surname the surname to be validated
-     * @return the validated surname
-     * @throws ValidationException if the surname is empty or contains
-     *                             non-regular characters
+     * @return true if the surname is valid
+     * @throws ValidationException if the surname is empty or contains invalid
+     *                             characters
      */
     public boolean validateSurname(String surname) throws ValidationException {
         // Check if the surname is not empty
@@ -62,11 +68,10 @@ public class ValidationService {
     /**
      * Validates an email by checking if it is not empty and contains a valid email
      * address.
-     *
-     * @param email the email to be validated
-     * @return the validated email
-     * @throws ValidationException if the email is empty or not a valid email
-     *                             address
+     * 
+     * @param email the email address to be validated
+     * @return true if the email address is valid
+     * @throws ValidationException if the email address is empty or invalid
      */
     public boolean validateEmail(String email) throws ValidationException {
         // Check if the email is not empty
@@ -85,13 +90,12 @@ public class ValidationService {
 
     /**
      * Validates a personal number by checking if it is not empty, contains a valid
-     * date, is a correct personal number and is unique.
+     * date and is a correct personal number.
      *
-     * @param pnr the personal number to be validated
-     * @return the validated personal number
-     * @throws ValidationException if the pnr is empty, not in the correct
-     *                             format, does not contain a valid date, can
-     *                             not be validated or is not unique
+     * @param pnr The personal number to be validated.
+     * @return true if the personal number is valid
+     * @throws ValidationException if the personal number is empty, has an invalid
+     *                             format, an invalid date, or is incorrect.
      */
     public boolean validatePnr(String pnr) throws ValidationException {
         // Check if the pnr is not empty
@@ -115,14 +119,13 @@ public class ValidationService {
     }
 
     /**
-     * Validates a username by checking if it is not empty, contains only regular
-     * alphanumerical characters and is unique.
+     * Validates a username by checking if it is not empty and contains only regular
+     * alphanumerical characters.
      *
      * @param username the username to be validated
-     * @return the validated username
-     * @throws ValidationException if the username is empty, contains
-     *                             non-regular alphanumerical characters or is
-     *                             not unique
+     * @return true if the username is valid
+     * @throws ValidationException if the username is empty or contains invalid
+     *                             characters
      */
     public boolean validateUsername(String username) throws ValidationException {
         // Check if the username is not empty
@@ -138,14 +141,15 @@ public class ValidationService {
     }
 
     /**
-     * Validates a password by checking if it is not empty and contains at least one
-     * digit, one lowercase letter and one uppercase letter.
-     *
+     * Validates a password based on the following criteria:
+     * - The password must not be empty.
+     * - The password must contain at least one digit, one lowercase letter, and one
+     * uppercase letter.
+     * - The password must be at least 8 characters long.
+     * 
      * @param password the password to be validated
-     * @return the validated password
-     * @throws ValidationException if the password is empty or does not contain
-     *                             at least one digit, one lowercase letter and
-     *                             one uppercase letter
+     * @return true if the password is valid
+     * @throws ValidationException if the password is not valid
      */
     public boolean validatePassword(String password) throws ValidationException {
         // Check if the password is not empty
