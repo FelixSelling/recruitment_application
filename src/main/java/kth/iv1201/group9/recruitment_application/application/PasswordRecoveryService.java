@@ -37,15 +37,14 @@ public class PasswordRecoveryService {
     private Map<String, String> tokenEmailMap;
 
     /**
-     * Handles the password recovery process for a given email.
-     * This method validates the email, retrieves the corresponding person from the
-     * repository,
-     * updates the person's password, and sends an email with the new password.
-     * If any exception occurs during the process, it will be printed to the
-     * console.
+     * Requests password recovery for the specified email address.
+     * If the email address is valid and exists in the person repository,
+     * a password recovery token is generated and stored in the tokenEmailMap.
+     * An email containing a password reset link is then sent to the specified email
+     * address.
      *
-     * @param email the email address for password recovery
-     * @throws ValidationException
+     * @param email the email address for which password recovery is requested
+     * @throws ValidationException if the email address is invalid
      */
     public void requestPasswordRecovery(String email) throws ValidationException {
 
@@ -62,6 +61,13 @@ public class PasswordRecoveryService {
         }
     }
 
+    /**
+     * Changes the password for a user identified by the provided token.
+     *
+     * @param token  The token used to identify the user.
+     * @param person The PersonDTO object containing the new password.
+     * @throws ValidationException If the new password fails validation.
+     */
     public void changePassword(String token, PersonDTO person) throws ValidationException {
         validationService.validatePassword(person.getPassword());
         String email = tokenEmailMap.get(token);
@@ -71,14 +77,30 @@ public class PasswordRecoveryService {
         removeToken(token);
     }
 
-    public void removeToken(String token) {
-        tokenEmailMap.remove(token);
-    }
-
+    /**
+     * Verifies if a given token exists in the token-email map.
+     * 
+     * @param token the token to be verified
+     * @return true if the token exists in the map, false otherwise
+     */
     public boolean verifyToken(String token) {
         return tokenEmailMap.containsKey(token);
     }
 
+    /**
+     * Removes the specified token from the tokenEmailMap.
+     *
+     * @param token the token to be removed
+     */
+    private void removeToken(String token) {
+        tokenEmailMap.remove(token);
+    }
+
+    /**
+     * Generates a random token as a string.
+     *
+     * @return a randomly generated token as a string.
+     */
     private String generateToken() {
         return UUID.randomUUID().toString();
     }

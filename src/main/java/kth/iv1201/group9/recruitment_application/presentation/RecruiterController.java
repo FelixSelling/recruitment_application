@@ -29,7 +29,7 @@ public class RecruiterController {
     public String showRecruiterView(Model model) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         model.addAttribute("name", authentication.getName());
-        model.addAttribute("applications", recruiterService.getApplicantionsList());
+        model.addAttribute("applications", recruiterService.getApplicationsList());
         return "recruiterView";
     }
 
