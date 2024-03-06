@@ -12,6 +12,10 @@ import org.springframework.security.web.SecurityFilterChain;
 
 import kth.iv1201.group9.recruitment_application.application.LoginService;
 
+/**
+ * This class represents the configuration for web security in the recruitment application.
+ * It provides the necessary security configurations for different endpoints and user roles.
+ */
 @Configuration
 @EnableWebSecurity
 @EnableAsync
