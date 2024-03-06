@@ -6,11 +6,19 @@ import org.springframework.context.annotation.Configuration;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+/**
+ * This class is responsible for creating a bean that represents a map of tokens to email addresses. The map is used for password recovery.
+ */
 @Configuration
 public class MapConfig {
 
-  @Bean
-  public Map<String, String> tokenEmailMap() {
-    return new ConcurrentHashMap<>();
-  }
+    /**
+     * Creates a bean that represents a map of tokens to email addresses.
+     *
+     * @return The map of tokens to email addresses.
+     */
+    @Bean
+    Map<String, String> tokenEmailMap() {
+        return new ConcurrentHashMap<>();
+    }
 }
